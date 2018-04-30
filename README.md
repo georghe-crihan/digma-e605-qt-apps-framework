@@ -181,6 +181,4 @@ I used netinstall and the "Development Workstation" type of install.
   $
   ```
 9. Do a yum upgrade
-10. Checkout the proper crosstools-ng source:
-    ```
-    ```
+10. Proceed to bootstrapping Crosstools-NG.
