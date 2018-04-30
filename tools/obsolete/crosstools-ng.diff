@@ -1,0 +1,25 @@
+diff --git a/Makefile.am b/Makefile.am
+index 5ee3682..599bc83 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -1,6 +1,8 @@
+ ## Process this file with automake to produce Makefile.in
+ ## vim: set noet :
+ 
++AUTOMAKE_OPTIONS = subdir-objects
++
+ include verbatim-data.mk
+ 
+ SUBDIRS		= kconfig
+diff --git a/configure.ac b/configure.ac
+index 765eae1..0bdca5e 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -87,6 +87,7 @@ AC_CONFIG_HEADERS([config.h])
+ 
+ # Modern GCC/GDB releases require C++ support in the compiler
+ AC_PROG_CC
++AM_PROG_CC_C_O
+ AC_PROG_CXX
+ AC_PROG_CPP
+ AC_PROG_LEX
