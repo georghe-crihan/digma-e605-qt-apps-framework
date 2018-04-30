@@ -2,7 +2,9 @@
 
 ## Subject
 This is a low-cost E-Ink pearl reader, based on Boeye Sibrary C60 platform and SDK.
+
 The application framework has been switched from GTK to QT 4.7 over the course of the years.
+
 Currently this product is discontinued and unsupported by the vendor.
 
 ## Some technical specs:
@@ -33,27 +35,29 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 
 
 ## Related works:
-* [http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672]
-[eView] although works only on GTK firmware
+* [http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672][eView] although works only on GTK firmware
 
 ## QT Refernces:
 * [http://opensource.rock-chips.com/wiki_Qt][QT Wiki page from Rockchip]
-* [https://wiki.qt.io/Building_Qt_for_Embedded_Linux
-][Installing QT for Raspberry Pi]
+* [https://wiki.qt.io/Building_Qt_for_Embedded_Linux][Installing QT for Raspberry Pi]
 
 ## How the kernel is put together:
 [http://roverbooksteel.narod.ru/debian/5point/kernel.htm][How is the kernel image built for the platform]
+> ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > cat kernel.img.tmp System.map > kernel.img
+> ```
 > . Работающие на частоте 600mhz и выше. Таких аппараты часто работают с SDK2-подобным форматом ядра (boot.img = zImage + initramfs-cpio)
 > 2. Зажатые на ~300mhz (Archos 70b ereader, Bq Voltaire и масса китайских девайсов). Здесь используется свой собственный, скудно документированный формат.
 > 
 > Утилита mkkrnlimg подписывает несжатое ядро (arch/arm/boot/Image) специальным образом:
+> ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
->
+> ```
 > Ядро склеивается с таблицей адресов System.map
+> ```
 > cat kernel.img.tmp System.map > kernel.img
->
+> ```
 > При распаковке прошивки утилитой rkunpack (на AFPTool не сработает) видно следующее:
 > kernel.img-raw - несжатое ядро (т.е. файл arch/arm/boot/Image поcле компиляции)
 > kernel.img-symbol - таблица адресов (System.map поcле компиляции)
@@ -65,9 +69,10 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 > dword 0x0045D2BC - размер ядра без таблицы адресов
 >
 > Т.е. mkkrnlimg по функционалу идентична утилите rkcrc из комплекта rkutils, запускаемой с ключом "-k":
+> ```
 > ./rkcrc -k kernel.img-raw kernel.img-signed
 > cat kernel.img-signed kernel.img-symbol > kernel.img
-> 
+> ```
 > При проверке такие ядра полноценно функционировали.
 >
 
