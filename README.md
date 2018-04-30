@@ -1,11 +1,11 @@
-#Digma E605 E-Ink reader third-party applications framework
+# Digma E605 E-Ink reader third-party applications framework
 
-##Subject
+## Subject
 This is a low-cost E-Ink pearl reader, based on Boeye Sibrary C60 platform and SDK.
 The application framework has been switched from GTK to QT 4.7 over the course of the years.
 Currently this product is discontinued and unsupported by the vendor.
 
-##Some technical specs:
+## Some technical specs:
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
 * Builds only on Centos-6 due to broken PPL 
 * Target chip RK-2818
@@ -32,16 +32,16 @@ Currently this product is discontinued and unsupported by the vendor.
 NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 
 
-##Related works:
+## Related works:
 * [http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672]
 [eView] although works only on GTK firmware
 
-##QT Refernces:
+## QT Refernces:
 * [http://opensource.rock-chips.com/wiki_Qt][QT Wiki page from Rockchip]
 * [https://wiki.qt.io/Building_Qt_for_Embedded_Linux
 ][Installing QT for Raspberry Pi]
 
-##How the kernel is put together:
+## How the kernel is put together:
 [http://roverbooksteel.narod.ru/debian/5point/kernel.htm][How is the kernel image built for the platform]
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > cat kernel.img.tmp System.map > kernel.img
@@ -71,31 +71,31 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 > При проверке такие ядра полноценно функционировали.
 >
 
-##General info on STOCK firmware for G6:
+## General info on STOCK firmware for G6:
 > Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
 
 [https://4pda.ru/forum/index.php?showtopic=423200&st=20][Russian Sibrary clone hacking page on a prominent gadgets forum]
 
-##Crosstools-ng bootstrap:
+## Crosstools-ng bootstrap:
 [https://crosstool-ng.github.io/docs/install/]
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
 git checkout ...
 ```
 
-##QT bootstrap:
+## QT bootstrap:
 https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
 
-##QT Example:
+## QT Example:
 http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
 Better yet use demos/embedded/digiflip
 
-##Tell the compiler versions:
+## Tell the compiler versions:
 ```
 objdump -s --section .comment
 ```
 
-##Unpack the firmware first:
+## Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
 ```
@@ -120,7 +120,7 @@ See no also, SSL, gstreamer, etc...
         -confirm-license
 ```
 
-##Plan:
+## Plan:
 * OS-disk utility for image mount
 * OS wine for rkunpack
 * Mention exact CentOS version
@@ -131,4 +131,4 @@ See no also, SSL, gstreamer, etc...
 * link to official rockchip-linux
 * mention of rk2818 stuff removed
 
-##References:
+## References:
