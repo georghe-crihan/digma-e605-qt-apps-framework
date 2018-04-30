@@ -4,7 +4,6 @@
 This is a low-cost E-Ink pearl reader, based on Boeye Sibrary C60 platform and SDK.
 
 The application framework has been switched from GTK to QT 4.7 over the course of the years.
-
 Currently this product is discontinued and unsupported by the vendor.
 
 ## Some technical specs:
@@ -86,8 +85,22 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 https://crosstool-ng.github.io/docs/install/
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
-git checkout ...
+git checkout crosstool-ng-1.12.4
+cd crosstool-ng
+./configure
+make
+sudo make install
+ct-ng menuconfig
 ```
+
+## Configuring crosstool-NG:
+* Target Architecture: arm
+* Operating System: Linux
+* C compiler: gcc version: 4.4.3
+* ---- Additional supported languages: C++
+* C-library: glibc: glibc version: 2.9
+
+
 
 ## QT bootstrap:
 https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
@@ -136,7 +149,7 @@ See no also, SSL, gstreamer, etc...
 * link to official rockchip-linux
 * mention of rk2818 stuff removed, commit ID here
 * mention downloading popl to the .build/tarballs on failure.
-* Official DIGMA firmware is (http://digma.ru)[here] and MD5 and SHA here
+* Official DIGMA firmware is [here](http://digma.ru) and MD5 and SHA here
 * GIT tag for Crosstools-NG here
 * Add EPEL repo to CentOS
 * visudo & enable wheel group for root access
@@ -149,3 +162,25 @@ See no also, SSL, gstreamer, etc...
 * figure out how the device's keys are handled
 * figure out how the device's virtual keyboard is invoked
 * try to build with the stock kernel - maybe that helps resolving the above issues.
+
+
+## Prerequisites:
+1. Install CentOS-6.9
+I used netinstall and the "Development Workstation" type of install.
+2. Enable the Wheel group in sudoers.conf through visudo(8).
+3. Start XQuartz
+4. SSH to host and start terminal
+5. I remove the GDM and WPA supplicant to conserve some memory; also I disable all but a single TTYs (see /etc/sysconfig/init)
+6. install texinfo, EPEL and, optionally, DKMS:
+  ```
+  yum -y install texinfo epel-release dkms
+  ```
+7. Optionally install the Parallels tools
+8. Switch to background by stopping and restarting VM with the script:
+  ```
+  $
+  ```
+9. Do a yum upgrade
+10. Checkout the proper crosstools-ng source:
+    ```
+    ```
