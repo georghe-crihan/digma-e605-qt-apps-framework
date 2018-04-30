@@ -127,16 +127,20 @@ See no also, SSL, gstreamer, etc...
 ```
 
 ## Plan:
-* OS-disk utility for image mount
-* OS wine for rkunpack
-* Mention exact CentOS version
-* Mention exact DIGMA update version
+* mention OSX Disk Utility for image mount
+* OSX Wine for rkunpack.exe as no source code is available
+* Mention exact CentOS version: CentOS-6.9-x86_64-netinstall.iso
 * Mention Parallels incl. script or QEMU or Docker
 * Mention kernel header version differences (and official SDK archive name, for that matter).
-* sdk headers to GIT, dist target to Makefile
+* Sibrary SDK headers to GIT, dist target to Makefile build
 * link to official rockchip-linux
-* mention of rk2818 stuff removed
+* mention of rk2818 stuff removed, commit ID here
 * mention downloading popl to the .build/tarballs on failure.
+* Official DIGMA firmware is (http://digma.ru)[here] and MD5 and SHA here
+* GIT tag for Crosstools-NG here
+* Add EPEL repo to CentOS
+* visudo & enable wheel group for root access
+* Quartz should be running
 
 ## References:
 
