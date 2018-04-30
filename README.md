@@ -35,19 +35,20 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 
 
 ## Related works:
-* [http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672][eView] although works only on GTK firmware
+* [eView](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although works only on GTK firmware
 
 ## QT Refernces:
-* [http://opensource.rock-chips.com/wiki_Qt][QT Wiki page from Rockchip]
-* [https://wiki.qt.io/Building_Qt_for_Embedded_Linux][Installing QT for Raspberry Pi]
+* [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
+* [Installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
 
 ## How the kernel is put together:
-[http://roverbooksteel.narod.ru/debian/5point/kernel.htm][How is the kernel image built for the platform]
+[How is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm)
 > ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > cat kernel.img.tmp System.map > kernel.img
 > ```
 > . Работающие на частоте 600mhz и выше. Таких аппараты часто работают с SDK2-подобным форматом ядра (boot.img = zImage + initramfs-cpio)
+>
 > 2. Зажатые на ~300mhz (Archos 70b ereader, Bq Voltaire и масса китайских девайсов). Здесь используется свой собственный, скудно документированный формат.
 > 
 > Утилита mkkrnlimg подписывает несжатое ядро (arch/arm/boot/Image) специальным образом:
@@ -79,10 +80,10 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 ## General info on STOCK firmware for G6:
 > Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
 
-[https://4pda.ru/forum/index.php?showtopic=423200&st=20][Russian Sibrary clone hacking page on a prominent gadgets forum]
+[Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
 ## Crosstools-ng bootstrap:
-[https://crosstool-ng.github.io/docs/install/]
+https://crosstool-ng.github.io/docs/install/
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
 git checkout ...
