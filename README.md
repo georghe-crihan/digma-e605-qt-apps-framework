@@ -136,5 +136,12 @@ See no also, SSL, gstreamer, etc...
 * sdk headers to GIT, dist target to Makefile
 * link to official rockchip-linux
 * mention of rk2818 stuff removed
+* mention downloading popl to the .build/tarballs on failure.
 
 ## References:
+
+## TODO:
+* build dbus and support
+* figure out how the device's keys are handled
+* figure out how the device's virtual keyboard is invoked
+* try to build with the stock kernel - maybe that helps resolving the above issues.
