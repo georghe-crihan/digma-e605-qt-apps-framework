@@ -46,12 +46,14 @@ The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
 on why there's Parallels).
 
 I used netinstall and the "Development Workstation" type of install.
-2. Enable the Wheel group in sudoers.conf through _visudo(8)_.
+
+2. Enable the Wheel group in sudoers.conf through _visudo(8)_
 3. Start XQuartz
 4. SSH to host and start terminal
-5. I remove the GDM and WPA supplicant to conserve some memory.
+5. Optionally remove the GDM and WPA supplicant to conserve some memory
 
 Also I disable all but a single TTYs (see /etc/sysconfig/init).
+
 6. install texinfo, EPEL and, optionally, DKMS:
   ```
   yum -y install texinfo epel-release dkms
@@ -299,7 +301,7 @@ git checkout 21d149db093c0d37e67620b281607844529fd0e8
 NB: After the above commit, RK2818 support has been discontinued.
 
 NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the 
-[strings](#strings), contained therein). 
+<span id="strings">strings</span>, contained therein). 
 
 ## Digressions
 
