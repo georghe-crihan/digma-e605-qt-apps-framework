@@ -200,21 +200,8 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   make
 ```
 
-See no also, SSL, gstreamer, etc...
-
-```
-  #./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
-  #        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
-  #        -qt-gfx-linuxfb -qt-gfx-vnc \
-  #        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
-  #        -qt-zlib -no-gif -no-libtiff \
-  #        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
-  #        -qt-kbd-linuxinput -nomake demos -nomake examples \
-  #        -qt-mouse-linuxinput -qt-mouse-tslib \
-  #        -confirm-license
-```
-
 ### Example:
+
 http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
 
 Better yet use demos/embedded/digiflip
@@ -428,3 +415,18 @@ quotations, I gave above.
 - [ ] figure out how the device's keys are handled
 - [ ] figure out how the device's virtual keyboard is invoked
 - [ ] try to build with the stock 2.6.25 kernel - maybe that helps resolving the above issues.
+- [ ] maybe include SSL, ALSA, gstreamer, etc...
+
+## QT configure options cheatsheet:
+
+```
+  #./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
+  #        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
+  #        -qt-gfx-linuxfb -qt-gfx-vnc \
+  #        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
+  #        -qt-zlib -no-gif -no-libtiff \
+  #        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
+  #        -qt-kbd-linuxinput -nomake demos -nomake examples \
+  #        -qt-mouse-linuxinput -qt-mouse-tslib \
+  #        -confirm-license
+```
