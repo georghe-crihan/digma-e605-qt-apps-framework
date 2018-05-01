@@ -41,7 +41,7 @@ http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it work
 
 ## Prerequisites
 0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
-1. Install CentOS-6.9
+1. Install CentOS 6.9
 
   The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
   on why there's Parallels).
@@ -73,7 +73,8 @@ http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it work
 
 ## Crosstool-ng
 
-NB: It builds only on Centos-6 due to broken cloog-ppl!
+NB: It builds only on CentOS 6 due to broken cloog-ppl (also, see the
+[Digressions](#digressions) section)!
 
 NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS.
 
@@ -363,6 +364,11 @@ In my case it's s trial version of the Parallels Desktop, which is easily
 scriptable and has an all superior OSX integration.
 
 I also use Wine-HQ for some tools whereas no open source is available.
+
+### Why CentOS 6?
+
+Q: And not CentOS 7, for example, or OSX or you name it?
+A: Because it's currently easier to build the Crosstool-NG toolchain.
 
 ## References
 
