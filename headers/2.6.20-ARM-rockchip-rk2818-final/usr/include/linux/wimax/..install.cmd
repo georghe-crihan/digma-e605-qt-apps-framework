@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/wimax/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/wimax /tmp/1/include/linux/wimax arm i2400m.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/wimax /tmp/1/include/linux/wimax arm ; touch /tmp/1/include/linux/wimax/.install

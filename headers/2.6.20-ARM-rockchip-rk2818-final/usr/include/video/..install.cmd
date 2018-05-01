@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/video/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/video /tmp/1/include/video arm edid.h sisfb.h uvesafb.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/video /tmp/1/include/video arm ; touch /tmp/1/include/video/.install

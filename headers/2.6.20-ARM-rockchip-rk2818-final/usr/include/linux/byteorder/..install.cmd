@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/byteorder/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/byteorder /tmp/1/include/linux/byteorder arm big_endian.h little_endian.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/byteorder /tmp/1/include/linux/byteorder arm ; touch /tmp/1/include/linux/byteorder/.install

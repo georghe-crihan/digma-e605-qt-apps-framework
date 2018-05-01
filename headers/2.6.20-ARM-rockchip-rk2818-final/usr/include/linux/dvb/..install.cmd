@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/dvb/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/dvb /tmp/1/include/linux/dvb arm audio.h ca.h dmx.h frontend.h net.h osd.h version.h video.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/dvb /tmp/1/include/linux/dvb arm ; touch /tmp/1/include/linux/dvb/.install

@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/raid/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/raid /tmp/1/include/linux/raid arm md_p.h md_u.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/raid /tmp/1/include/linux/raid arm ; touch /tmp/1/include/linux/raid/.install

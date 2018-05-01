@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/hdlc/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/hdlc /tmp/1/include/linux/hdlc arm ioctl.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/hdlc /tmp/1/include/linux/hdlc arm ; touch /tmp/1/include/linux/hdlc/.install

@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/can/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/can /tmp/1/include/linux/can arm bcm.h error.h netlink.h raw.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/can /tmp/1/include/linux/can arm ; touch /tmp/1/include/linux/can/.install

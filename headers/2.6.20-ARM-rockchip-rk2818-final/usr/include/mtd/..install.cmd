@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/mtd/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/mtd /tmp/1/include/mtd arm inftl-user.h mtd-abi.h mtd-user.h nftl-user.h ubi-user.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/mtd /tmp/1/include/mtd arm ; touch /tmp/1/include/mtd/.install

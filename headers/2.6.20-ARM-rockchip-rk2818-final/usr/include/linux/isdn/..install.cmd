@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/isdn/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/isdn /tmp/1/include/linux/isdn arm capicmd.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/isdn /tmp/1/include/linux/isdn arm ; touch /tmp/1/include/linux/isdn/.install

@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/spi/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/spi /tmp/1/include/linux/spi arm spidev.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/spi /tmp/1/include/linux/spi arm ; touch /tmp/1/include/linux/spi/.install

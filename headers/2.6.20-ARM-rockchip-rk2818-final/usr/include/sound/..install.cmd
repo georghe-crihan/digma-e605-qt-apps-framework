@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/sound/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/sound /tmp/1/include/sound arm asequencer.h asound.h asound_fm.h emu10k1.h hdsp.h hdspm.h sb16_csp.h sfnt_info.h sscape_ioctl.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/sound /tmp/1/include/sound arm ; touch /tmp/1/include/sound/.install

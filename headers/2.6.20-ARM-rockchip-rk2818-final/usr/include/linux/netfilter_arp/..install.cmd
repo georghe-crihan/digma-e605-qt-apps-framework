@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/linux/netfilter_arp/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/netfilter_arp /tmp/1/include/linux/netfilter_arp arm arp_tables.h arpt_mangle.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/linux/netfilter_arp /tmp/1/include/linux/netfilter_arp arm ; touch /tmp/1/include/linux/netfilter_arp/.install

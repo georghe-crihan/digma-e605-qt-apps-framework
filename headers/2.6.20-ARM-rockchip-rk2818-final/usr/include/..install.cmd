@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include /tmp/1/include arm ; perl scripts/headers_install.pl /home/mac/linux-rockchip/include /tmp/1/include arm ; touch /tmp/1/include/.install

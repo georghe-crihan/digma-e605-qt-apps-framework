@@ -36,7 +36,8 @@ Currently this product is discontinued and unsupported by the vendor.
   qt-everywhere-opensource-src-4.7.4
 
 ## Related works:
-* [eView](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it works only on GTK firmware.
+* [eView](https://github.com/S-trace/eView)
+http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it works only on GTK firmware.
 
 ## Prerequisites
 0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
@@ -327,12 +328,22 @@ The kernel GIT repository:
 ```
 git clone https://github.com/linux-rockchip/linux-rockchip.git 
 cd linux-rockchip
+# Checkout what appears to be a 2.6.20
 git checkout 21d149db093c0d37e67620b281607844529fd0e8
 ```
 NB: After the above commit, RK2818 support has been discontinued.
 
 NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the 
 [strings](#user-content-strings), contained therein). 
+
+#### Generating the headers:
+```
+  make menuconfig
+  # Select the RK2818 architecture and VMMU in the menu
+  make ARCH=arm INSTALL_HDR_PATH=/tmp/1 \
+    CROSS_COMPILE=/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/arm-926ejs-linux-gnueabi- \
+    headers_install
+```
 
 ## Digressions
 
@@ -354,6 +365,9 @@ scriptable and has an all superior OSX integration.
 I also use Wine-HQ for some tools whereas no open source is available.
 
 ## References
+
+##### Similar works:
+* [eView, russian forum](https://github.com/S-trace/eView)
 
 ##### Rockchip platform:
 * [Another Android Rockchip device modification page](http://freaktab.com/forum/tv-player-support/rk3188-devices/minix-x7-etc/647213-tutorial-modifying-the-boot-image)

@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/rdma/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/rdma /tmp/1/include/rdma arm ib_user_mad.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/rdma /tmp/1/include/rdma arm ; touch /tmp/1/include/rdma/.install

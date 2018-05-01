@@ -1,0 +1,1 @@
+cmd_/tmp/1/include/scsi/.install := perl scripts/headers_install.pl /home/mac/linux-rockchip/include/scsi /tmp/1/include/scsi arm scsi.h scsi_bsg_fc.h scsi_netlink.h scsi_netlink_fc.h; perl scripts/headers_install.pl /home/mac/linux-rockchip/include/scsi /tmp/1/include/scsi arm ; touch /tmp/1/include/scsi/.install
