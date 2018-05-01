@@ -16,7 +16,7 @@ Currently this product is discontinued and unsupported by the vendor.
 * Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
 
-  Kernel version 2.6.25, <span id="strings">strings</span> found therein:
+  Kernel version 2.6.25, <span id="#strings">strings</span> found therein:
 ```
   RK2818 SCU VERSION=20111204,V1.12
   Linux version 2.6.25-dirty (zpp@zpp) (gcc version 4.6.3 (Sourcery CodeBench Lite 2012.03-57) ) #767 Tue Mar 25 17:00:08 CST 2014
@@ -42,17 +42,17 @@ Currently this product is discontinued and unsupported by the vendor.
 0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
 1. Install CentOS-6.9
 
-The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
-on why there's Parallels).
+  The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
+  on why there's Parallels).
 
-I used netinstall and the "Development Workstation" type of install.
+  I used netinstall and the "Development Workstation" type of install.
 
 2. Enable the Wheel group in sudoers.conf through _visudo(8)_
 3. Start XQuartz
 4. SSH to host and start terminal
 5. Optionally remove the GDM and WPA supplicant to conserve some memory
 
-Also I disable all but a single TTYs (see /etc/sysconfig/init).
+  Also I disable all but a single TTYs (see /etc/sysconfig/init).
 
 6. install texinfo, EPEL and, optionally, DKMS:
   ```
