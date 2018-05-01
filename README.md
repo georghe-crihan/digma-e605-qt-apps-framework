@@ -368,6 +368,7 @@ I also use Wine-HQ for some tools whereas no open source is available.
 ### Why CentOS 6?
 
 Q: And not CentOS 7, for example, or OSX or you name it?
+
 A: Because it's currently easier to build the Crosstool-NG toolchain.
 
 ## References
