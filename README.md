@@ -291,7 +291,7 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 > kernel.img-raw - non-compressed kernel (i.e. a arch/arm/boot/Image file after the build)
 >
 > kernel.img-symbol - address table (System.map file after the build)
-
+>
 > The result of mkkrnlimg tool:
 > ```
 > kernel.img
