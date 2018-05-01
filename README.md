@@ -6,13 +6,17 @@ This is a low-cost E-Ink pearl reader, based on Boeye Sibrary C60 platform and S
 The application framework has been switched from GTK to QT 4.7 over the course of the years.
 Currently this product is discontinued and unsupported by the vendor.
 
-## Some technical specs:
-* Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
-* Builds only on Centos-6 due to broken PPL 
+### Some technical specs and related info:
 * Target chip RK-2818
-* ARM926EJC or ARM926EJ-S rev 5 (v5l)
-* CPU architecture  5TEJ
-* Kernel version 2.6.25 
+
+  ARM926EJC or ARM926EJ-S rev 5 (v5l)
+
+  CPU architecture  5TEJ
+
+* Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
+* Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
+
+  Kernel version 2.6.25, strings found therein:
 ```
   RK2818 SCU VERSION=20111204,V1.12
   Linux version 2.6.25-dirty (zpp@zpp) (gcc version 4.6.3 (Sourcery CodeBench Lite 2012.03-57) ) #767 Tue Mar 25 17:00:08 CST 2014
@@ -20,66 +24,17 @@ Currently this product is discontinued and unsupported by the vendor.
   rknand_base.c version: 4.30 20111009
   rknand_buffer.c version: 4.38 20121130
 ```
-* Glibc V2.9 
+* Glibc V2.9, strings found therein: 
 ```
   GNU C Library (crosstool-NG 1.12.4) stable release version 2.9, by Roland McGrath et al.
 ```
 * GCC v.4.4.3
 * The device uses QT linuxfb
-* Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
-* qt-everywhere-opensource-src-4.7.4
 
-
-NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
-
+  qt-everywhere-opensource-src-4.7.4
 
 ## Related works:
 * [eView](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although works only on GTK firmware
-
-## QT Refernces:
-* [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
-* [Installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
-
-## How the kernel is put together:
-[How is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm)
-> ```
-> ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
-> cat kernel.img.tmp System.map > kernel.img
-> ```
-> . Работающие на частоте 600mhz и выше. Таких аппараты часто работают с SDK2-подобным форматом ядра (boot.img = zImage + initramfs-cpio)
->
-> 2. Зажатые на ~300mhz (Archos 70b ereader, Bq Voltaire и масса китайских девайсов). Здесь используется свой собственный, скудно документированный формат.
-> 
-> Утилита mkkrnlimg подписывает несжатое ядро (arch/arm/boot/Image) специальным образом:
-> ```
-> ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
-> ```
-> Ядро склеивается с таблицей адресов System.map
-> ```
-> cat kernel.img.tmp System.map > kernel.img
-> ```
-> При распаковке прошивки утилитой rkunpack (на AFPTool не сработает) видно следующее:
-> kernel.img-raw - несжатое ядро (т.е. файл arch/arm/boot/Image поcле компиляции)
-> kernel.img-symbol - таблица адресов (System.map поcле компиляции)
-
-> Результат работы утилиты mkkrnlimg:
->￼
->
-> dword 0x4C4E524B - маркер-идентификатор KRNL
-> dword 0x0045D2BC - размер ядра без таблицы адресов
->
-> Т.е. mkkrnlimg по функционалу идентична утилите rkcrc из комплекта rkutils, запускаемой с ключом "-k":
-> ```
-> ./rkcrc -k kernel.img-raw kernel.img-signed
-> cat kernel.img-signed kernel.img-symbol > kernel.img
-> ```
-> При проверке такие ядра полноценно функционировали.
->
-
-## General info on STOCK firmware for G6:
-> Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
-
-[Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
 ## Prerequisites
 1. Install CentOS-6.9
@@ -101,6 +56,11 @@ I used netinstall and the "Development Workstation" type of install.
 10. Proceed to bootstrapping Crosstools-NG.
 
 ## Crosstool-ng
+
+NB: It Builds only on Centos-6 due to broken cloog-ppl!
+
+NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
+
 ### Bootstrap:
 See the details here: https://crosstool-ng.github.io/docs/install/
 ```
@@ -194,6 +154,47 @@ objdump -s --section .comment
 imgRePackerRK /cid update.img
 ```
 
+### How the kernel is put together:
+[How is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm)
+> ```
+> ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
+> cat kernel.img.tmp System.map > kernel.img
+> ```
+> . Работающие на частоте 600mhz и выше. Таких аппараты часто работают с SDK2-подобным форматом ядра (boot.img = zImage + initramfs-cpio)
+>
+> 2. Зажатые на ~300mhz (Archos 70b ereader, Bq Voltaire и масса китайских девайсов). Здесь используется свой собственный, скудно документированный формат.
+> 
+> Утилита mkkrnlimg подписывает несжатое ядро (arch/arm/boot/Image) специальным образом:
+> ```
+> ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
+> ```
+> Ядро склеивается с таблицей адресов System.map
+> ```
+> cat kernel.img.tmp System.map > kernel.img
+> ```
+> При распаковке прошивки утилитой rkunpack (на AFPTool не сработает) видно следующее:
+> kernel.img-raw - несжатое ядро (т.е. файл arch/arm/boot/Image поcле компиляции)
+> kernel.img-symbol - таблица адресов (System.map поcле компиляции)
+
+> Результат работы утилиты mkkrnlimg:
+>￼
+>
+> dword 0x4C4E524B - маркер-идентификатор KRNL
+> dword 0x0045D2BC - размер ядра без таблицы адресов
+>
+> Т.е. mkkrnlimg по функционалу идентична утилите rkcrc из комплекта rkutils, запускаемой с ключом "-k":
+> ```
+> ./rkcrc -k kernel.img-raw kernel.img-signed
+> cat kernel.img-signed kernel.img-symbol > kernel.img
+> ```
+> При проверке такие ядра полноценно функционировали.
+>
+
+### General info on STOCK firmware for G6:
+> Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
+
+[Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
+
 ## Digressions
 ### Why there is a linux VM?
 
@@ -213,7 +214,10 @@ imgRePackerRK /cid update.img
 * visudo & enable wheel group for root access
 * Quartz should be running
 
-## References:
+## References
+### QT:
+* [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
+* [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
 
 ## TODO:
 * build dbus and support
