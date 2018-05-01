@@ -1,5 +1,19 @@
 # Digma E605 E-Ink reader third-party applications framework
 
+## Contents:
+
+* [Subject](#subject)
+* [Some technical specs and related info](#some-technical-specs-and-related-info)
+* [Related works](#related-works)
+* [Prerequisites](#prerequisites)
+* [CrosstoolNG](#crosstoolng)
+* [QT](#qt)
+* [Deploying](#deploying)
+* [Research](#research)
+* [Digressions](#digressions)
+* [References](#references)
+* [TODO](#todo)
+
 ## Subject
 This is a low-cost E-Ink pearl reader, based on Boeye Sibrary C60 platform and SDK.
 
@@ -206,7 +220,7 @@ http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
 
 Better yet use demos/embedded/digiflip
 
-### Deploying:
+## Deploying:
 
 As mentioned in the [Research](#research) section, just copy the binary you
 built to device's SD-CARD. This could be done through a USB cable, whereas
