@@ -420,13 +420,22 @@ quotations, I gave above.
 ## QT configure options cheatsheet:
 
 ```
-  #./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
-  #        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
-  #        -qt-gfx-linuxfb -qt-gfx-vnc \
-  #        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
-  #        -qt-zlib -no-gif -no-libtiff \
-  #        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
-  #        -qt-kbd-linuxinput -nomake demos -nomake examples \
-  #        -qt-mouse-linuxinput -qt-mouse-tslib \
-  #        -confirm-license
+  -embedded x86
+  -qt-gfx-vnc
+  -no-largefile
+  -exceptions 
+  -no-sse2
+  -qt-zlib
+  -no-gif
+  -no-libtiff
+  -qt-libpng
+  -no-libmng
+  -qt-libjpeg
+  -openssl
+  -depths 16
+  -qt-kbd-linuxinput
+  -nomake demos
+  -nomake examples
+  -qt-mouse-linuxinput
+  -qt-mouse-tslib
 ```
