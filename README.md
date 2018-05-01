@@ -264,19 +264,19 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 > cat kernel.img.tmp System.map > kernel.img
 > ```
 > There are two types of R2818 devices:
-> 1. Running at a 600mhz clock speed and above. These devices often uas a SDK2-like kernel format (boot.img = zImage + initramfs-cpio)
+> 1. Running at a 600mhz clock speed and above. These devices often uas a SDK2-like kernel format (*boot.img = zImage + initramfs-cpio*)
 >
-> 2. Capped at ~300mhz (Archos 70b ereader, Bq Voltaire and a large number of chinese devices). A proprietary, scarcely documented format is used here.
+> 2. Capped at ~300mhz (*Archos 70b ereader*, *Bq Voltaire* and a large number of chinese devices). A proprietary, scarcely documented format is used here.
 > 
-> The mkkrnlimg tool signs a non-compressed kernel (arch/arm/boot/Image) in a special way:
+> The *mkkrnlimg* tool signs a non-compressed kernel (*arch/arm/boot/Image*) in a special way:
 > ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > ```
-> The kernel is concatenated with the address table file System.map
+> The kernel is concatenated with the address table file *System.map*
 > ```
 > cat kernel.img.tmp System.map > kernel.img
 > ```
-> One can find the following, after extracting the firmware with the rkunpack tool (AFPTool wouldn't work):
+> One can find the following, after extracting the firmware with the *rkunpack* tool (*AFPTool* wouldn't work):
 > ```
 > sadmich@esktop:~/rk2818$ ls -gG ./Image
 > total 131108
@@ -288,11 +288,11 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 > -rw-r--r-- 1   2408452 2012-02-19 22:48 recovery.img
 > -rw-r--r-- 1 119644160 2012-02-19 22:48 system.img
 > ```
-> kernel.img-raw - non-compressed kernel (i.e. a arch/arm/boot/Image file after the build)
+> *kernel.img-raw* - non-compressed kernel (i.e. a *arch/arm/boot/Image* file after the build)
 >
-> kernel.img-symbol - address table (System.map file after the build)
+> *kernel.img-symbol* - address table (*System.map* file after the build)
 >
-> The result of mkkrnlimg tool:
+> The result of *mkkrnlimg* tool:
 > ```
 > kernel.img
 > Offset  00 01 02 03   04 05 06 07   08 09 0A 0B   0C 0D 0E 0F   10 11 12 13   0123456789ABCDEF0123				
@@ -304,7 +304,7 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 >
 > dword 0x0045D2BC - kernel size without the address table
 >
-> I.e. the mkkrnlimg tool is functionally identical to the rkcrc tool from the  rkutils package, when run with a "-k" command line parameter:
+> I.e. the *mkkrnlimg* tool is functionally identical to the *rkcrc* tool from the  *rkutils* package, when run with a "*-k*" command line parameter:
 > ```
 > ./rkcrc -k kernel.img-raw kernel.img-signed
 > cat kernel.img-signed kernel.img-symbol > kernel.img
@@ -314,7 +314,7 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 
 ### General info on STOCK firmware for the G6 platform:
 Quoting russian [Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20) (my translation):
-> A bit of software: if an executable file or a shell-script is copied into the E-Reader's memory or onto its SD-CARD and then opened in its "File Manager" - it thus will be run. It permits to launch arbitrary code on the E-Reader.
+> A bit of software: if an executable file or a shell-script is copied into the E-Reader's memory or onto its SD-CARD and then opened via its "File Manager" - it thus will be run. It permits to launch arbitrary code on the E-Reader.
 
 NB: apparently, the SD-CARD's FAT filesystem is mounted with *x* mode bits 
 automatically turned on, so any file has the execute permissions set.
@@ -361,6 +361,7 @@ I also use Wine-HQ for some tools whereas no open source is available.
 ##### QT:
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
+* [Solving QT build issues](http://bluelimn.tistory.com/entry/Qt-Cross-compile)
 
 Here, the authors apparently were able to patch the boot image, unlike in the
 quotations, I gave above.
