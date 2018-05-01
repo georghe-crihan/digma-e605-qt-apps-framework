@@ -11,7 +11,7 @@ Currently this product is discontinued and unsupported by the vendor.
 
   ARM926EJC or ARM926EJ-S rev 5 (v5l)
 
-  CPU architecture  5TEJ
+  CPU architecture  5TEJ (J stands for Java extensions)
 
 * Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
@@ -39,7 +39,7 @@ Currently this product is discontinued and unsupported by the vendor.
 ## Prerequisites
 1. Install CentOS-6.9
 I used netinstall and the "Development Workstation" type of install.
-2. Enable the Wheel group in sudoers.conf through visudo(8).
+2. Enable the Wheel group in sudoers.conf through _visudo(8)_.
 3. Start XQuartz
 4. SSH to host and start terminal
 5. I remove the GDM and WPA supplicant to conserve some memory; also I disable all but a single TTYs (see /etc/sysconfig/init)
@@ -57,9 +57,9 @@ I used netinstall and the "Development Workstation" type of install.
 
 ## Crosstool-ng
 
-NB: It Builds only on Centos-6 due to broken cloog-ppl!
+NB: It builds only on Centos-6 due to broken cloog-ppl!
 
-NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
+NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS.
 
 ### Bootstrap:
 See the details here: https://crosstool-ng.github.io/docs/install/
@@ -72,8 +72,9 @@ make
 sudo make install
 ```
 
-### Configuring:
+### Configuring the toolchain:
 ```
+  # Get the original Boeye/Sibrary headers from its SDK:
   git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
   cd digma-e605-qt-apps-framework/headers/2.6.29-ARM-sibrary/usr
   make dist
@@ -113,14 +114,22 @@ sudo make install
 ### Build:
 Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
 ```
-export PATH="${PATH}:/home/mac/x-tools/arm-unknown-linux-gnueabi/bin/«
+  cd
+  wget http://master.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz 
+  tar -xvzf qt-everywhere-opensource-src-4.7.4.tar.gz
+  cd qt-everywhere-opensource-src-4.7.4
+  cp -R mkspecs/qws/linux-arm-gnueabi-g++ mkspecs/qws/rk2818-g++/
+  # Edit the qmake.conf, replace the _arm-none-linux-gnueabi-*_ prefix with the
+  # _arm-926ejs-linux-gnueabi-*_ and make any other changes as necessary.
+  vi mkspecs/qws/rk2818-g++/qmake.conf
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
 
-./configure -lrt -opensource -confirm-license -prefix /opt/qt-arm \
+  ./configure -lrt -opensource -confirm-license -prefix /opt/qt-arm \
     -no-qt3support -embedded arm -little-endian \
-    -xplatform qws/linux-arm-gnueabi-g++ -fast -no-xinput -no-xrandr \
+    -xplatform qws/rk2818-g++ -fast -no-xinput -no-xrandr \
     -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns \
     -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
-    -no-xfixes -no-mitshm -qt-gfx-linuxfb
+    -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus
 ```
 
 See no also, SSL, gstreamer, etc...
@@ -144,16 +153,16 @@ Better yet use demos/embedded/digiflip
 
 
 ## Research
-### Tell the compiler versions:
-```
-objdump -s --section .comment
-```
 
 ### Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
 ```
 
+### Tell the compiler versions:
+```
+objdump -s --section .comment target-file-path
+```
 ### How the kernel is put together:
 [How is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm)
 > ```
@@ -195,29 +204,72 @@ imgRePackerRK /cid update.img
 
 [Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
+### Official Rockchip kernel
+
+Rockchip officially supports RK2818 under Linux: http://linux-rockchip.org.
+
+The kernel GIT repository:
+```
+git clone https://github.com/linux-rockchip/linux-rockchip.git 
+git checkout 21d149db093c0d37e67620b281607844529fd0e8
+```
+NB: After the above commit, RK2818 support has been discontinued.
+NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the strings, contained therein). 
+
 ## Digressions
+
 ### Why there is a linux VM?
 
-## Plan:
-* mention OSX Disk Utility for image mount
-* OSX Wine for rkunpack.exe as no source code is available
-* Mention exact CentOS version: CentOS-6.9-x86_64-netinstall.iso
-* Mention Parallels incl. script or QEMU or Docker
-* Mention kernel header version differences (and official SDK archive name, for that matter).
-* Sibrary SDK headers to GIT, dist target to Makefile build
-* link to official rockchip-linux
-* mention of rk2818 stuff removed, commit ID here
-* mention downloading popl to the .build/tarballs on failure.
-* Official DIGMA firmware is [here](http://digma.ru) and MD5 and SHA here
-* GIT tag for Crosstools-NG here
-* Add EPEL repo to CentOS
-* visudo & enable wheel group for root access
-* Quartz should be running
+Personally I use OSX, as I strongly believe Linux on a Desktop is a waste of
+time and effort, unless you are a strict Stallman follower/orthodox.
+This is arguable, but ultimately a matter of personal taste.
+
+In addition, I can promptly have any version of OS in a VM I want.
+
+The emulator used could be anything from Parallels to QEMU or BOCHS.
+Macports can make that really easy.
+It could even be Docker engine (which presently still uses QEMU internally).
+
+In my case it's s trial version of the Parallels Desktop, which is easily
+scriptable and has an all superior OSX integration.
+
+I also use Wine-HQ for some tools whereas no open source is available.
 
 ## References
 ### QT:
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
+
+#### CentOS image used:
+* Name: CentOS-6.9-x86_64-netinstall.iso
+* Size: 241172480
+* MD5: cdab6b8142cb03e5f02102879d11ef44
+* SHA1: 32f9f74fd27ec1ff7cc4f39a80d0dae34d9ec18b
+
+#### Official DIGMA firmware:
+* URL: http://digma.ru
+* Name: e605_boot620_20141220.zip
+* Size: 136682454 bytes
+* MD5: b739257045ec5f32363db0ff3ef936e1
+* SHA1: 6f2c9da77ccf88443c4b6f28bbe6655b15f320ca
+
+And therein:
+* Name: system.img
+* Size: 335544320
+* MD5: 50c88cd2314c3f78aadeb6c6f1f5f7ed
+* SHA1: 736976b6398a0398903a866ce42ad30b707bba88
+
+#### The original Boeye/Sibrary toolchain, found elsewhere:
+* Name: sibrary_toolchain.tar.bz2 
+* Size: 116721851 bytes
+* MD5: 7dfd9a84d98242e6780e95886a7ce7a2
+* SHA1: 43833e54f9e81d9afcd9e06f76f085b5b99fb922
+
+#### QT Anywhere 4.7.4:
+* URL: http://master.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz
+* Size: 220388303
+* MD5: 9831cf1dfa8d0689a06c2c54c5c65aaf
+* SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
 * build dbus and support
@@ -225,4 +277,9 @@ imgRePackerRK /cid update.img
 * figure out how the device's virtual keyboard is invoked
 * try to build with the stock kernel - maybe that helps resolving the above issues.
 
+### This document:
+* mention OSX Disk Utility for image mount
+* OSX Wine for rkunpack.exe as no source code is available
+* Mention Parallels script.
+* Mention kernel header version differences (and official SDK archive name, for that matter).
 
