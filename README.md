@@ -82,7 +82,7 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 [Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
 ## Crosstools-ng bootstrap:
-https://crosstool-ng.github.io/docs/install/
+See the details here: https://crosstool-ng.github.io/docs/install/
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
 git checkout crosstool-ng-1.12.4
@@ -90,7 +90,6 @@ cd crosstool-ng
 ./configure
 make
 sudo make install
-ct-ng menuconfig
 ```
 
 ## Configuring crosstool-NG:
@@ -100,10 +99,13 @@ ct-ng menuconfig
   make dist
   mv ../kernel-headers-2.6.29.tgz ~/
   cd ~/crosstools-ng
-  # Retrieve this, as otherwise the build fails:
+  # You have to download these manually, as otherwise the build just fails:
   wget http://ftp.osuosl.org/pub/clfs/conglomeration/cloog-ppl/cloog-ppl-0.15.10.tar.gz
+  wget https://kent.dl.sourceforge.net/project/duma/duma/2.5.15/duma_2_5_15.tar.gz
+  wget https://kent.dl.sourceforge.net/project/expat/expat/2.0.1/expat-2.0.1.tar.gz
+  wget https://datapacket.dl.sourceforge.net/project/strace/strace/4.5.19/strace-4.5.19.tar.bz2
   mkdir -p .build/tarballs
-  mv cloog-ppl-0.15.10.tar.gz .build/tarballs
+  mv cloog-ppl-0.15.10.tar.gz duma_2_5_15.tar.gz expat-2.0.1.tar.gz strace-4.5.19.tar.bz2 .build/tarballs/
   cp samples/arm-unknown-linux-gnueabi/crosstool.config .config
   ct-ng menuconfig
   # and afterwards

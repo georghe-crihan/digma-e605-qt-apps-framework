@@ -6,4 +6,4 @@ headers_check:
 
 dist:
 	rm -f ../kernel-headers-2.6.29.tgz
-	tar -C .. -cvf ../kernel-headers-2.6.29.tgz usr
+	tar -C .. -cvzf ../kernel-headers-2.6.29.tgz usr
