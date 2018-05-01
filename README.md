@@ -176,9 +176,14 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   wget http://master.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz 
   tar -xvzf qt-everywhere-opensource-src-4.7.4.tar.gz
   cd qt-everywhere-opensource-src-4.7.4
+  # Use my QT configuration:
+  cp -R ~/digma-e605-qt-apps-framework/rk2818-g++ mkspecs/qws/
+
+  # - or - you might roll your own, by starting from the default:
+
   cp -R mkspecs/qws/linux-arm-gnueabi-g++ mkspecs/qws/rk2818-g++/
-  # Edit the qmake.conf, replace the arm-none-linux-gnueabi-* prefix with the
-  # arm-926ejs-linux-gnueabi-* and make any other changes as necessary.
+  # and then edit the qmake.conf, replace the arm-none-linux-gnueabi-* prefix
+  # with the arm-926ejs-linux-gnueabi-* and make any other changes as necessary.
   vi mkspecs/qws/rk2818-g++/qmake.conf
 
   export PKG_CONFIG_PATH=${LIBPATH}/pkgconfig  
@@ -189,7 +194,8 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
     -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns \
     -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
     -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus -force-pkg-config
-
+  # Apply the patches:
+  patch < ~/digma-e605-qt-apps-framework/qt-patches/patch-io.pri
   make
 ```
 
@@ -235,14 +241,15 @@ Get the imgRePackerRK tool, see [References](#references) section.
 Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
-# or, in my case, whereas Wine-HQ is used (see the "Digressions" section as to
-why):
+# or, in my case, whereas Wine-HQ is used (see the "Digressions" section as to why):
 digma-e605-qt-apps-framework/tools/unpack.sh
 ```
 
-Open the OSX DiskUtility application and open that image therein. I have a
-trial version of the EXTFS tools by Paragon installed (including the kernel
-support), so it mounts nicely.
+Open the OSX DiskUtility application and open that image therein.
+
+NB: I have a trial version of the EXTFS tools by Paragon installed (including
+the kernel support), so it mounts nicely, but you could, for example, use
+OSXFuse.
 
 ### Tell the compiler versions:
 ```
@@ -285,12 +292,12 @@ Quoting russian [how is the kernel image built for the platform](http://roverboo
 >
 > kernel.img-symbol - address table (System.map file after the build)
 
-> The result after mkkrnlimg tool:
+> The result of mkkrnlimg tool:
 > ```
 > kernel.img
-> Offset  00 01 02 03    04 05 06 07    08 09 0A 0B    0C 0D 0E 0F    10 11 12 13    0123456789ABCDEF0123				
-> 0000000 4B 52 4E 4C    BC 02 45 00    03 F0 21 E3    10 9F 10 EE    55 00 00 EB    KRNL..E...!.....U...
-> 0000020 05 A0 B0 E1    51 00 00 0A    6A 00 00 EB    05 80 B0 E1    4E 00 00 0A    ....Q...j.......N...
+> Offset  00 01 02 03   04 05 06 07   08 09 0A 0B   0C 0D 0E 0F   10 11 12 13   0123456789ABCDEF0123				
+> 0000000 4B 52 4E 4C   BC 02 45 00   03 F0 21 E3   10 9F 10 EE   55 00 00 EB   KRNL..E...!.....U...
+> 0000020 05 A0 B0 E1   51 00 00 0A   6A 00 00 EB   05 80 B0 E1   4E 00 00 0A   ....Q...j.......N...
 > ...
 > ```
 > dword 0x4C4E524B - magic value - KRNL
