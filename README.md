@@ -16,7 +16,7 @@ Currently this product is discontinued and unsupported by the vendor.
 * Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
 
-  Kernel version 2.6.25, <span id="#strings">strings</span> found therein:
+  Kernel version 2.6.25, <i id="#strings">strings</i> found therein:
 ```
   RK2818 SCU VERSION=20111204,V1.12
   Linux version 2.6.25-dirty (zpp@zpp) (gcc version 4.6.3 (Sourcery CodeBench Lite 2012.03-57) ) #767 Tue Mar 25 17:00:08 CST 2014
