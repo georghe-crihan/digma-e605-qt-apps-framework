@@ -53,7 +53,7 @@ I used netinstall and the "Development Workstation" type of install.
   $
   ```
 9. Do a yum upgrade
-10. Proceed to bootstrapping Crosstools-NG.
+
 
 ## Crosstool-ng
 
@@ -62,11 +62,11 @@ NB: It builds only on Centos-6 due to broken cloog-ppl!
 NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS.
 
 ### Bootstrap:
-See the details here: https://crosstool-ng.github.io/docs/install/
+See the details here: https://crosstool-ng.github.io/docs/
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
-git checkout crosstool-ng-1.12.4
 cd crosstool-ng
+git checkout crosstool-ng-1.12.4
 ./configure
 make
 sudo make install
@@ -111,6 +111,24 @@ sudo make install
 
 
 ## QT
+### Prerequisites:
+
+NB: These libraries, as well as the QT library itself WILL NOT be installed to
+the target device, but only used on the build machine as build dependencies
+since the original SDK headers and libraries are unavailable.
+
+#### expat (a dependency of libdbus-1)
+
+```
+  wget
+```
+
+#### libdbus-1 (a dependency of QT)
+
+```
+  wget
+```
+
 ### Build:
 Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
 ```
@@ -119,8 +137,8 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   tar -xvzf qt-everywhere-opensource-src-4.7.4.tar.gz
   cd qt-everywhere-opensource-src-4.7.4
   cp -R mkspecs/qws/linux-arm-gnueabi-g++ mkspecs/qws/rk2818-g++/
-  # Edit the qmake.conf, replace the _arm-none-linux-gnueabi-*_ prefix with the
-  # _arm-926ejs-linux-gnueabi-*_ and make any other changes as necessary.
+  # Edit the qmake.conf, replace the arm-none-linux-gnueabi-* prefix with the
+  # arm-926ejs-linux-gnueabi-* and make any other changes as necessary.
   vi mkspecs/qws/rk2818-g++/qmake.conf
   export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
 
@@ -130,6 +148,8 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
     -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns \
     -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
     -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus
+
+  make
 ```
 
 See no also, SSL, gstreamer, etc...
