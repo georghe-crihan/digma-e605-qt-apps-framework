@@ -215,15 +215,16 @@ Better yet use demos/embedded/digiflip
 ### Deploying:
 
 As mentioned in the [Research](#research) section, just copy the binary you
-built to device's SD-CARD. This might be done through a USB cable, whereas
+built to device's SD-CARD. This could be done through a USB cable, whereas
 the SD-CARD would be mounted as a normal disk device.
 
-Once copied (unplug the cable first), just launch the executable from within
-the device's file manager - simply click on it.
+Once copied (unmount properly and unplug the cable first), just launch the
+executable from within the device's File Manager - simply click on it.
 
-The firstapp directory contains an installation script to integrate the app
-into the device environment, so as it would be available via a normal launch
-icon in the "More" folder in the stock QT File Manager. Click on the 
+The [firstapp](firstapp) directory contains an installation
+[script](firstapp/install.sh) to integrate the app into the device
+environment, so as it would be available via a normal launch icon in the
+"More..." folder in the stock QT File Manager. Click on the 
 [install.sh](firstapp/install.sh) file, when finished copying.
 
 ## Research
@@ -234,7 +235,8 @@ Get the imgRePackerRK tool, see [References](#references) section.
 Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
-# or, in my case, whereas Wine-HQ is used (see the "Digressions" section):
+# or, in my case, whereas Wine-HQ is used (see the "Digressions" section as to
+why):
 digma-e605-qt-apps-framework/tools/unpack.sh
 ```
 
@@ -249,44 +251,59 @@ objdump -s --section .comment /Volumes/Untitled/target-file
 
 ### How the kernel is put together:
 Quoting [how is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm) (my translation):
+> Putting together a built kernel:
 > ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > cat kernel.img.tmp System.map > kernel.img
 > ```
-> . Работающие на частоте 600mhz и выше. Таких аппараты часто работают с SDK2-подобным форматом ядра (boot.img = zImage + initramfs-cpio)
+> There are two types of R2818 devices:
+> 1. Running at a 600mhz clock speed and above. These devices often uas a SDK2-like kernel format (boot.img = zImage + initramfs-cpio)
 >
-> 2. Зажатые на ~300mhz (Archos 70b ereader, Bq Voltaire и масса китайских девайсов). Здесь используется свой собственный, скудно документированный формат.
+> 2. Capped at ~300mhz (Archos 70b ereader, Bq Voltaire and a large number of chinese devices). A proprietary, scarcely documented format is used here.
 > 
-> Утилита mkkrnlimg подписывает несжатое ядро (arch/arm/boot/Image) специальным образом:
+> The mkkrnlimg tool signs a non-compressed kernel (arch/arm/boot/Image) in a special way:
 > ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
 > ```
-> Ядро склеивается с таблицей адресов System.map
+> The kernel is concatenated with the address table file System.map
 > ```
 > cat kernel.img.tmp System.map > kernel.img
 > ```
-> При распаковке прошивки утилитой rkunpack (на AFPTool не сработает) видно следующее:
-> kernel.img-raw - несжатое ядро (т.е. файл arch/arm/boot/Image поcле компиляции)
-> kernel.img-symbol - таблица адресов (System.map поcле компиляции)
+> One can find the following, after extracting the firmware with the rkunpack tool (AFPTool wouldn't work):
+> ```
+> sadmich@esktop:~/rk2818$ ls -gG ./Image
+> total 131108
+> -rw-r--r-- 1   1441796 2012-02-19 22:48 boot.img
+> -rw-r--r-- 1   5348346 2012-02-19 22:48 kernel.img
+> -rw-r--r-- 1   4575932 2012-02-19 22:48 kernel.img-raw
+> -rw-r--r-- 1    772402 2012-02-19 22:48 kernel.img-symbol
+> -rw-r--r-- 1     49152 2012-02-19 22:48 misc.img
+> -rw-r--r-- 1   2408452 2012-02-19 22:48 recovery.img
+> -rw-r--r-- 1 119644160 2012-02-19 22:48 system.img
+> ```
+> kernel.img-raw - non-compressed kernel (i.e. a arch/arm/boot/Image file after the build)
+> kernel.img-symbol - address table (System.map file after the build)
 
-> Результат работы утилиты mkkrnlimg:
->￼
+> The result after mkkrnlimg tool:
+> ...Hex dump picture here...￼
 >
-> dword 0x4C4E524B - маркер-идентификатор KRNL
-> dword 0x0045D2BC - размер ядра без таблицы адресов
+> dword 0x4C4E524B - magic value - KRNL
+> dword 0x0045D2BC - kernel size without the address table
 >
-> Т.е. mkkrnlimg по функционалу идентична утилите rkcrc из комплекта rkutils, запускаемой с ключом "-k":
+> I.e. the mkkrnlimg tool is functionally identical to the rkcrc tool from the  rkutils package, when run with a "-k" command line parameter:
 > ```
 > ./rkcrc -k kernel.img-raw kernel.img-signed
 > cat kernel.img-signed kernel.img-symbol > kernel.img
 > ```
-> При проверке такие ядра полноценно функционировали.
+> The check reported these kinds of kernels were fully functional.
 >
 
 ### General info on STOCK firmware for the G6 platform:
 Quoting [russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20) (my translation):
-> Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
+> A bit of software: if an executable file or a shell-script is copied into the E-Reader's memory or onto its SD-CARD and then opened in its "File Manager" - it thus will be run. It permits to launch arbitrary code on the E-Reader.
 
+NB: apparently, the SD-CARD's FAT filesystem is mounted with *x* mode bits 
+automatically turned on, so any file has the execute permissions set.
 
 ### Official Rockchip kernel
 
