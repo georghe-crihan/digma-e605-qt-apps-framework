@@ -42,7 +42,7 @@ Currently this product is discontinued and unsupported by the vendor.
 0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
 1. Install CentOS-6.9
 
-The Parallels VM is named "CentOS 6". (See [Digressions](#Digressions) section
+The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
 on why there's Parallels).
 
 I used netinstall and the "Development Workstation" type of install.
@@ -212,7 +212,7 @@ Better yet use demos/embedded/digiflip
 
 ### Deploying:
 
-As mentioned in the [Research](#Research) section, just copy the binary you
+As mentioned in the [Research](#research) section, just copy the binary you
 built to device's SD-CARD. This might be done through a USB cable, whereas
 the SD-CARD would be mounted as a normal disk device.
 
@@ -227,12 +227,12 @@ file, when finished copying.
 ## Research
 
 ### Stock DIGMA firmware analysis: 
-Get the imgRePackerRK tool, see [References](#References) section.
+Get the imgRePackerRK tool, see [References](#references) section.
 
 Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
-# or, in my case, whereas Wine-HQ is used (see the [Digressions](#Digressions) section):
+# or, in my case, whereas Wine-HQ is used (see the "Digressions" section):
 digma-e605-qt-apps-framework/tools/unpack.sh
 ```
 
@@ -321,49 +321,49 @@ I also use Wine-HQ for some tools whereas no open source is available.
 
 ## References
 
-### Rockchip platform:
+#### Rockchip platform:
 * [Another Android Rockchip device modification page](http://freaktab.com/forum/tv-player-support/rk3188-devices/minix-x7-etc/647213-tutorial-modifying-the-boot-image)
 
-### QT:
+#### QT:
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
 
 Here, the authors apparently were able to patch the boot image, unlike in the
 quotations, I gave above.
 
-### CentOS image used:
+#### CentOS image used:
 * Name: CentOS-6.9-x86_64-netinstall.iso
 * Size: 241172480
 * MD5: cdab6b8142cb03e5f02102879d11ef44
 * SHA1: 32f9f74fd27ec1ff7cc4f39a80d0dae34d9ec18b
 
-### imgRePackerRK:
+#### imgRePackerRK:
 * URL: https://forum.xda-developers.com/showthread.php?t=2257331
 * Name: imgRePackerRK_106.zip
 * Size: 180485
 * MD5: 852bcc8f56694d3658db0d7d5e117093
 * SHA1: f17f013c59e29d7376bdb1e856590dbd4a315797
 
-### Stock DIGMA firmware:
+#### Stock DIGMA firmware:
 * URL: http://digma.ru
 * Name: e605_boot620_20141220.zip
 * Size: 136682454 bytes
 * MD5: b739257045ec5f32363db0ff3ef936e1
 * SHA1: 6f2c9da77ccf88443c4b6f28bbe6655b15f320ca
 
-And therein:
+##### and therein:
 * Name: system.img
 * Size: 335544320
 * MD5: 50c88cd2314c3f78aadeb6c6f1f5f7ed
 * SHA1: 736976b6398a0398903a866ce42ad30b707bba88
 
-### The original Boeye/Sibrary toolchain, found elsewhere:
+#### The original Boeye/Sibrary toolchain, found elsewhere:
 * Name: sibrary_toolchain.tar.bz2 
 * Size: 116721851 bytes
 * MD5: 7dfd9a84d98242e6780e95886a7ce7a2
 * SHA1: 43833e54f9e81d9afcd9e06f76f085b5b99fb922
 
-### QT Anywhere 4.7.4:
+#### QT Anywhere 4.7.4:
 * URL: http://master.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz
 * Size: 220388303
 * MD5: 9831cf1dfa8d0689a06c2c54c5c65aaf
