@@ -100,6 +100,10 @@ ct-ng menuconfig
   make dist
   mv ../kernel-headers-2.6.29.tgz ~/
   cd ~/crosstools-ng
+  # Retrieve this, as otherwise the build fails:
+  wget http://ftp.osuosl.org/pub/clfs/conglomeration/cloog-ppl/cloog-ppl-0.15.10.tar.gz
+  mkdir -p .build/tarballs
+  mv cloog-ppl-0.15.10.tar.gz .build/tarballs
   cp samples/arm-unknown-linux-gnueabi/crosstool.config .config
   ct-ng menuconfig
   # and afterwards
