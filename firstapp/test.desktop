@@ -2,7 +2,7 @@
 [Desktop Entry]
 Name=Test
 GenericName=Test
-Exec=/media/mmcblk1p1/junk/digiflip
+Exec=/media/mmcblk1p1/junk/firstapp
 Type=Application
 Icon=sudo
 Name[ru_RU]=Тестовое приложение

@@ -8,7 +8,7 @@
 * [Prerequisites](#prerequisites)
 * [CrosstoolNG](#crosstoolng)
   * [Bootstrap](#bootstrap)
-  * [Configuring the toolchain][#configuring-the-toolchain]
+  * [Configuring the toolchain](#configuring-the-toolchain)
 * [QT](#qt)
   * [Prerequisites](#prerequisites-1)
   * [Build](#build)
@@ -16,6 +16,8 @@
 * [Deploying](#deploying)
 * [Research](#research)
   * [How the kernel is put together](#how-the-kernel-is-put-together)
+  * [Official Rockchip kernel](#official-rockchip-kernel)
+    * [Generating the headers](#generating-the-headers)
 * [Digressions](#digressions)
 * [References](#references)
 * [TODO](#todo)
@@ -65,7 +67,8 @@ Currently this product is discontinued and unsupported by the vendor.
   The Parallels VM is named "CentOS 6". (See [Digressions](#digressions) section
   on why there's Parallels).
 
-  I used netinstall and the "Development Workstation" type of install.
+  I used [netinstall](#centos-image-used) and the "Development Workstation"
+  type of install.
 
 2. Enable the Wheel group in sudoers.conf through _visudo(8)_
 3. Start XQuartz
@@ -218,13 +221,22 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   # Apply the patches:
   patch -p1 < ~/digma-e605-qt-apps-framework/qt-patches/patch-io.pri
   make
+  sudo -s
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
+  make install
 ```
 
 ## Example application
 
-http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
+[firstapp](firstapp), originally part of the QT distribution under
+demos/embedded/digiflip.
 
-Better yet use demos/embedded/digiflip
+```
+  cd ~/digma-e605-qt-apps-framework/firstapp
+  /opt/rk2818/bin/qmake
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
+  make
+```
 
 ## Deploying:
 
@@ -244,7 +256,8 @@ environment, so as it would be available via a normal launch icon in the
 ## Research
 
 ### Stock DIGMA firmware analysis: 
-Get the imgRePackerRK tool, see [References](#references) section.
+Get the [imgRePackerRK](#imgRePackerRK) tool, see [References](#references)
+section.
 
 Unpack the firmware first:
 ```
@@ -389,6 +402,7 @@ A: Because it's currently easier to build the Crosstool-NG toolchain.
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
 * [Solving QT build issues](http://bluelimn.tistory.com/entry/Qt-Cross-compile)
+* [Another sample QT application](http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html)
 
 Here, the authors apparently were able to patch the boot image, unlike in the
 quotations, I gave above.
@@ -432,9 +446,13 @@ quotations, I gave above.
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-- [ ] figure out how the device's keys are handled
+- [ ] figure out how the device's keys are handled, most probably, via 
+/usr/lib/boeye/libboeye.so and it has something to do with Android platform,
+specifically,
+see the homeReleased()/sendMenuKey()/sendBackKey()/sendHomeKey()/sendFlushKey()
+BUT: what obout the arrows/OK?
 - [ ] figure out how the device's virtual keyboard is invoked
-- [ ] try to build with the stock 2.6.25 kernel - maybe that helps resolving the above issues.
+- [ ] maybe build with the stock 2.6.25 kernel
 - [ ] maybe include SSL, ALSA, gstreamer, etc...
 
 ## QT configure options cheatsheet:
