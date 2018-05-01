@@ -16,7 +16,7 @@ Currently this product is discontinued and unsupported by the vendor.
 * Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
 
-  Kernel version 2.6.25, strings found therein:
+  Kernel version 2.6.25, #strings found therein:
 ```
   RK2818 SCU VERSION=20111204,V1.12
   Linux version 2.6.25-dirty (zpp@zpp) (gcc version 4.6.3 (Sourcery CodeBench Lite 2012.03-57) ) #767 Tue Mar 25 17:00:08 CST 2014
@@ -221,8 +221,8 @@ the device's file manager - simply click on it.
 
 The firstapp directory contains an installation script to integrate the app
 into the device environment, so as it would be available via a normal launch
-icon in the "More" folder in the stock QT File Manager. Click on the install.sh
-file, when finished copying.
+icon in the "More" folder in the stock QT File Manager. Click on the 
+[install.sh](firstapp/install.sh) file, when finished copying.
 
 ## Research
 
@@ -298,7 +298,8 @@ git checkout 21d149db093c0d37e67620b281607844529fd0e8
 ```
 NB: After the above commit, RK2818 support has been discontinued.
 
-NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the strings, contained therein). 
+NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the 
+[strings](#strings), contained therein). 
 
 ## Digressions
 
@@ -370,6 +371,6 @@ quotations, I gave above.
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-* figure out how the device's keys are handled
-* figure out how the device's virtual keyboard is invoked
-* try to build with the stock kernel - maybe that helps resolving the above issues.
+- [ ] figure out how the device's keys are handled
+- [ ] figure out how the device's virtual keyboard is invoked
+- [ ] try to build with the stock kernel - maybe that helps resolving the above issues.
