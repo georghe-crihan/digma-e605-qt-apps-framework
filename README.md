@@ -81,6 +81,25 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 
 [Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
+## Prerequisites
+1. Install CentOS-6.9
+I used netinstall and the "Development Workstation" type of install.
+2. Enable the Wheel group in sudoers.conf through visudo(8).
+3. Start XQuartz
+4. SSH to host and start terminal
+5. I remove the GDM and WPA supplicant to conserve some memory; also I disable all but a single TTYs (see /etc/sysconfig/init)
+6. install texinfo, EPEL and, optionally, DKMS:
+  ```
+  yum -y install texinfo epel-release dkms
+  ```
+7. Optionally install the Parallels tools
+8. Switch to background by stopping and restarting VM with the script:
+  ```
+  $
+  ```
+9. Do a yum upgrade
+10. Proceed to bootstrapping Crosstools-NG.
+
 ## Crosstool-ng
 ### Bootstrap:
 See the details here: https://crosstool-ng.github.io/docs/install/
@@ -93,7 +112,7 @@ make
 sudo make install
 ```
 
-### Configuring
+### Configuring:
 ```
   git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
   cd digma-e605-qt-apps-framework/headers/2.6.29-ARM-sibrary/usr
@@ -131,24 +150,8 @@ sudo make install
 
 
 ## QT
-### Bootstrap:
-https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
-
-## QT Example:
-http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
-Better yet use demos/embedded/digiflip
-
-## Tell the compiler versions:
-```
-objdump -s --section .comment
-```
-
-## Unpack the firmware first:
-```
-imgRePackerRK /cid update.img
-```
-
-## Build QT:
+### Build:
+Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
 ```
 export PATH="${PATH}:/home/mac/x-tools/arm-unknown-linux-gnueabi/bin/«
 
@@ -166,6 +169,22 @@ See no also, SSL, gstreamer, etc...
         -qt-kbd-linuxinput -nomake demos -nomake examples
         -qt-mouse-linuxinput -qt-mouse-tslib
         -confirm-license
+```
+
+### Example:
+http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
+Better yet use demos/embedded/digiflip
+
+
+## Research
+### Tell the compiler versions:
+```
+objdump -s --section .comment
+```
+
+### Unpack the firmware first:
+```
+imgRePackerRK /cid update.img
 ```
 
 ## Plan:
@@ -193,21 +212,3 @@ See no also, SSL, gstreamer, etc...
 * try to build with the stock kernel - maybe that helps resolving the above issues.
 
 
-## Prerequisites:
-1. Install CentOS-6.9
-I used netinstall and the "Development Workstation" type of install.
-2. Enable the Wheel group in sudoers.conf through visudo(8).
-3. Start XQuartz
-4. SSH to host and start terminal
-5. I remove the GDM and WPA supplicant to conserve some memory; also I disable all but a single TTYs (see /etc/sysconfig/init)
-6. install texinfo, EPEL and, optionally, DKMS:
-  ```
-  yum -y install texinfo epel-release dkms
-  ```
-7. Optionally install the Parallels tools
-8. Switch to background by stopping and restarting VM with the script:
-  ```
-  $
-  ```
-9. Do a yum upgrade
-10. Proceed to bootstrapping Crosstools-NG.
