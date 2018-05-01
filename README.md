@@ -81,7 +81,8 @@ NB: crosstool-ng DOES NOT build on OSX. One of the reasons - case-insensitive FS
 
 [Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
 
-## Crosstools-ng bootstrap:
+## Crosstool-ng
+### Bootstrap:
 See the details here: https://crosstool-ng.github.io/docs/install/
 ```
 git clone https://github.com/crosstool-ng/crosstool-ng.git
@@ -92,7 +93,7 @@ make
 sudo make install
 ```
 
-## Configuring crosstool-NG:
+### Configuring
 ```
   git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
   cd digma-e605-qt-apps-framework/headers/2.6.29-ARM-sibrary/usr
@@ -129,7 +130,8 @@ sudo make install
 
 
 
-## QT bootstrap:
+## QT
+### Bootstrap:
 https://beter93.wordpress.com/2013/03/22/how-to-compile-qt-lib-with-crosstool-ng-for-raspberry/
 
 ## QT Example:
