@@ -28,29 +28,41 @@ Currently this product is discontinued and unsupported by the vendor.
 ```
   GNU C Library (crosstool-NG 1.12.4) stable release version 2.9, by Roland McGrath et al.
 ```
+* EPAT 2.0.1, produces libexpat.so.1.5.2
+* DBUS 1.2.24, produces libdbus-1.so.3.4.0
 * GCC v.4.4.3
 * The device uses QT linuxfb
 
   qt-everywhere-opensource-src-4.7.4
 
 ## Related works:
-* [eView](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although works only on GTK firmware
+* [eView](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it works only on GTK firmware.
 
 ## Prerequisites
+0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
 1. Install CentOS-6.9
+
+The Parallels VM is named "CentOS 6". (See Digressions section on why there's Parallels).
+
 I used netinstall and the "Development Workstation" type of install.
 2. Enable the Wheel group in sudoers.conf through _visudo(8)_.
 3. Start XQuartz
 4. SSH to host and start terminal
-5. I remove the GDM and WPA supplicant to conserve some memory; also I disable all but a single TTYs (see /etc/sysconfig/init)
+5. I remove the GDM and WPA supplicant to conserve some memory.
+
+Also I disable all but a single TTYs (see /etc/sysconfig/init).
 6. install texinfo, EPEL and, optionally, DKMS:
   ```
   yum -y install texinfo epel-release dkms
   ```
 7. Optionally install the Parallels tools
-8. Switch to background by stopping and restarting VM with the script:
+8. Switch to background:
   ```
-  $
+  # Stop the Hypervisor and the VM:
+  digma-e605-qt-apps-framework/tools/centos-up.sh 1
+  # ... and start:
+  digma-e605-qt-apps-framework/tools/centos-up.sh
+
   ```
 9. Do a yum upgrade
 
@@ -70,6 +82,7 @@ git checkout crosstool-ng-1.12.4
 ./configure
 make
 sudo make install
+cd
 ```
 
 ### Configuring the toolchain:
@@ -120,13 +133,38 @@ since the original SDK headers and libraries are unavailable.
 #### expat (a dependency of libdbus-1)
 
 ```
-  wget
+  wget https://datapacket.dl.sourceforge.net/project/expat/expat/2.0.1/expat-2.0.1.tar.gz
+  tar -xvzf expat-2.0.1.tar.gz
+  cd expat-2.0.1
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
+  ./configure --host=arm-926ejs-linux-gnueabi --prefix=/opt/rk2818
+  make
+  sudo -s
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
+  make install
+  exit
+  cd
 ```
 
 #### libdbus-1 (a dependency of QT)
 
 ```
-  wget
+  wget https://dbus.freedesktop.org/releases/dbus/dbus-1.2.24.tar.gz
+  tar -xvzf dbus-1.2.24.tar.gz
+  cd dbus-1.2.24
+  RK2818=/opt/rk2818
+  INCPATH=${RK2818}/include
+  LIBPATH=${RK2818}/lib
+  export CFLAGS=-I${INCPATH}
+  export LDFLAGS=-L${LIBPATH}
+  export CXXFLAGS=${CFLAGS}
+  ./configure --host=arm-926ejs-linux-gnueabi --prefix=/opt/rk2818
+  make
+  sudo -s
+  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
+  make install
+  exit
+  cd
 ```
 
 ### Build:
@@ -140,14 +178,15 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   # Edit the qmake.conf, replace the arm-none-linux-gnueabi-* prefix with the
   # arm-926ejs-linux-gnueabi-* and make any other changes as necessary.
   vi mkspecs/qws/rk2818-g++/qmake.conf
-  export PATH="${PATH}:/home/mac/x-tools/arm-926ejs-linux-gnueabi/bin/"
 
-  ./configure -lrt -opensource -confirm-license -prefix /opt/qt-arm \
+  export PKG_CONFIG_PATH=${LIBPATH}/pkgconfig  
+
+  ./configure -lrt -opensource -confirm-license -prefix /opt/rk2818 \
     -no-qt3support -embedded arm -little-endian \
     -xplatform qws/rk2818-g++ -fast -no-xinput -no-xrandr \
     -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns \
     -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
-    -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus
+    -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus -force-pkg-config
 
   make
 ```
@@ -155,15 +194,15 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
 See no also, SSL, gstreamer, etc...
 
 ```
-./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
-        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
-        -qt-gfx-linuxfb -qt-gfx-vnc \
-        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
-        -qt-zlib -no-gif -no-libtiff \
-        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
-        -qt-kbd-linuxinput -nomake demos -nomake examples \
-        -qt-mouse-linuxinput -qt-mouse-tslib \
-        -confirm-license
+  #./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
+  #        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
+  #        -qt-gfx-linuxfb -qt-gfx-vnc \
+  #        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
+  #        -qt-zlib -no-gif -no-libtiff \
+  #        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
+  #        -qt-kbd-linuxinput -nomake demos -nomake examples \
+  #        -qt-mouse-linuxinput -qt-mouse-tslib \
+  #        -confirm-license
 ```
 
 ### Example:
@@ -171,18 +210,41 @@ http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
 
 Better yet use demos/embedded/digiflip
 
+### Deploying:
+
+As mentioned in the Research section, just copy the binary you built to device's
+SD-CARD. This might be done through a USB cable, whereas the SD-CARD would be
+mounted as a normal disk device.
+
+Once copied (unplug the cable first), just launch the executable from within
+the device's file manager - simply click on it.
+
+The firstapp directory contains an installation script to integrate the app
+into the device environment, so as it would be available via a normal launch
+icon in the "More" folder in the stock QT File Manager. Click on the install.sh
+file, when finished copying.
 
 ## Research
 
-### Unpack the firmware first:
+### Stock DIGMA firmware analysis: 
+Get the imgRePackerRK tool, see References section.
+
+Unpack the firmware first:
 ```
 imgRePackerRK /cid update.img
+# or, in my case, whereas Wine-HQ is used (see the "Digressions" section):
+digma-e605-qt-apps-framework/tools/unpack.sh
 ```
+
+Open the OSX DiskUtility application and open that image therein. I have a
+trial version of the EXTFS tools by Paragon installed (including the kernel
+support), so it mounts nicely.
 
 ### Tell the compiler versions:
 ```
-objdump -s --section .comment target-file-path
+objdump -s --section .comment /Volumes/Untitled/target-file
 ```
+
 ### How the kernel is put together:
 [How is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm)
 > ```
@@ -219,7 +281,7 @@ objdump -s --section .comment target-file-path
 > При проверке такие ядра полноценно функционировали.
 >
 
-### General info on STOCK firmware for G6:
+### General info on STOCK firmware for the G6 platform:
 > Немного софта: если положить в память книги или на карточку исполнимый файл либо shell-скрипт и затем открыть его в "проводнике" - он будет выполнен. Это позволяет запускать на книге произвольный код. 
 
 [Russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20)
@@ -231,6 +293,7 @@ Rockchip officially supports RK2818 under Linux: http://linux-rockchip.org.
 The kernel GIT repository:
 ```
 git clone https://github.com/linux-rockchip/linux-rockchip.git 
+cd linux-rockchip
 git checkout 21d149db093c0d37e67620b281607844529fd0e8
 ```
 NB: After the above commit, RK2818 support has been discontinued.
@@ -259,6 +322,8 @@ I also use Wine-HQ for some tools whereas no open source is available.
 ### QT:
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
+* [Another Android Rockchip device modification page](http://freaktab.com/forum/tv-player-support/rk3188-devices/minix-x7-etc/647213-tutorial-modifying-the-boot-image)
+Here, the authors apparently were able to patch the boot image, unlike in the quotations, I gave above.
 
 #### CentOS image used:
 * Name: CentOS-6.9-x86_64-netinstall.iso
@@ -266,7 +331,14 @@ I also use Wine-HQ for some tools whereas no open source is available.
 * MD5: cdab6b8142cb03e5f02102879d11ef44
 * SHA1: 32f9f74fd27ec1ff7cc4f39a80d0dae34d9ec18b
 
-#### Official DIGMA firmware:
+#### imgRePackerRK:
+* URL: https://forum.xda-developers.com/showthread.php?t=2257331
+* Name: imgRePackerRK_106.zip
+* Size: 180485
+* MD5: 852bcc8f56694d3658db0d7d5e117093
+* SHA1: f17f013c59e29d7376bdb1e856590dbd4a315797
+
+#### Stock DIGMA firmware:
 * URL: http://digma.ru
 * Name: e605_boot620_20141220.zip
 * Size: 136682454 bytes
@@ -292,14 +364,6 @@ And therein:
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-* build dbus and support
 * figure out how the device's keys are handled
 * figure out how the device's virtual keyboard is invoked
 * try to build with the stock kernel - maybe that helps resolving the above issues.
-
-### This document:
-* mention OSX Disk Utility for image mount
-* OSX Wine for rkunpack.exe as no source code is available
-* Mention Parallels script.
-* Mention kernel header version differences (and official SDK archive name, for that matter).
-
