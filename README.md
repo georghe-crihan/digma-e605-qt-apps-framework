@@ -195,7 +195,7 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
     -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
     -no-xfixes -no-mitshm -qt-gfx-linuxfb -dbus -force-pkg-config
   # Apply the patches:
-  patch < ~/digma-e605-qt-apps-framework/qt-patches/patch-io.pri
+  patch -p1 < ~/digma-e605-qt-apps-framework/qt-patches/patch-io.pri
   make
 ```
 
