@@ -301,7 +301,7 @@ git checkout 21d149db093c0d37e67620b281607844529fd0e8
 NB: After the above commit, RK2818 support has been discontinued.
 
 NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the 
-[strings](user-content-strings), contained therein). 
+[strings](#user-content-strings), contained therein). 
 
 ## Digressions
 
