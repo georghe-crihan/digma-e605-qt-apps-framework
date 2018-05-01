@@ -155,24 +155,31 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
 ```
 export PATH="${PATH}:/home/mac/x-tools/arm-unknown-linux-gnueabi/bin/«
 
-./configure -lrt -opensource -confirm-license -prefix /opt/qt-arm -no-qt3support -embedded arm -little-endian -xplatform qws/linux-arm-gnueabi-g++ -fast -no-xinput -no-xrandr -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia -no-xfixes -no-mitshm -qt-gfx-linuxfb
+./configure -lrt -opensource -confirm-license -prefix /opt/qt-arm \
+    -no-qt3support -embedded arm -little-endian \
+    -xplatform qws/linux-arm-gnueabi-g++ -fast -no-xinput -no-xrandr \
+    -no-openvg -no-opengl -no-gtkstyle -no-nis -no-cups -xmlpatterns \
+    -exceptions -no-stl -no-accessibility -no-audio-backend -no-multimedia \
+    -no-xfixes -no-mitshm -qt-gfx-linuxfb
 ```
 
 See no also, SSL, gstreamer, etc...
 
 ```
-./configure -xplatform qws/linux-i486-g++ -embedded x86 
-        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded
-        -qt-gfx-linuxfb -qt-gfx-vnc
-        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 -qt-zlib -no-gif -no-libtiff
-        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16
-        -qt-kbd-linuxinput -nomake demos -nomake examples
-        -qt-mouse-linuxinput -qt-mouse-tslib
+./configure -xplatform qws/linux-i486-g++ -embedded x86 \ 
+        -prefix /usr/i486-pc-linux-gnu/usr/local/qt-embedded \
+        -qt-gfx-linuxfb -qt-gfx-vnc \
+        -no-largefile -exceptions -no-accessibility -no-qt3support -no-sse2 \
+        -qt-zlib -no-gif -no-libtiff \
+        -qt-libpng -no-libmng -qt-libjpeg -openssl -no-nis -no-cups -depths 16 \
+        -qt-kbd-linuxinput -nomake demos -nomake examples \
+        -qt-mouse-linuxinput -qt-mouse-tslib \
         -confirm-license
 ```
 
 ### Example:
 http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
+
 Better yet use demos/embedded/digiflip
 
 
@@ -186,6 +193,9 @@ objdump -s --section .comment
 ```
 imgRePackerRK /cid update.img
 ```
+
+## Digressions
+### Why there is a linux VM?
 
 ## Plan:
 * mention OSX Disk Utility for image mount
