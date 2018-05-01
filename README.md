@@ -3,13 +3,19 @@
 ## Contents:
 
 * [Subject](#subject)
-* [Some technical specs and related info](#some-technical-specs-and-related-info)
+  * [Some technical specs and related info](#some-technical-specs-and-related-info)
 * [Related works](#related-works)
 * [Prerequisites](#prerequisites)
 * [CrosstoolNG](#crosstoolng)
+  * [Bootstrap](#bootstrap)
+  * [Configuring the toolchain][#configuring-the-toolchain]
 * [QT](#qt)
+  * [Prerequisites](#prerequisites-1)
+  * [Build](#build)
+* [Example application](#example-application)
 * [Deploying](#deploying)
 * [Research](#research)
+  * [How the kernel is put together](#how-the-kernel-is-put-together)
 * [Digressions](#digressions)
 * [References](#references)
 * [TODO](#todo)
@@ -214,7 +220,7 @@ Example build for Raspberry-Pi: https://beter93.wordpress.com/2013/03/22/how-to-
   make
 ```
 
-### Example:
+## Example application
 
 http://doc.qt.io/qt-5/qtwidgets-tools-echoplugin-example.html
 

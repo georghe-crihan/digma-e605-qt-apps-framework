@@ -5,7 +5,7 @@
          }
  
 -        linux-*:!symbian {
-+        linux-*|arm-926ejs-linux-gnueabi-*:!symbian {
++        linux-*|arm-926ejs-linux-gnueabi-*|rk2818-*:!symbian {
              SOURCES += \
                      io/qfilesystemwatcher_inotify.cpp \
                      io/qfilesystemwatcher_dnotify.cpp
