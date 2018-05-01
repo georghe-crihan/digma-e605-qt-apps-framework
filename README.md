@@ -427,4 +427,4 @@ quotations, I gave above.
 ## TODO:
 - [ ] figure out how the device's keys are handled
 - [ ] figure out how the device's virtual keyboard is invoked
-- [ ] try to build with the stock kernel - maybe that helps resolving the above issues.
+- [ ] try to build with the stock 2.6.25 kernel - maybe that helps resolving the above issues.
