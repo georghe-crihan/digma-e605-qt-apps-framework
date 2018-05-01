@@ -36,8 +36,7 @@ Currently this product is discontinued and unsupported by the vendor.
   qt-everywhere-opensource-src-4.7.4
 
 ## Related works:
-* [eView](https://github.com/S-trace/eView)
-http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672) although it works only on GTK firmware.
+* [eView](https://github.com/S-trace/eView) although it works only on GTK firmware.
 
 ## Prerequisites
 0. git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
@@ -374,7 +373,7 @@ A: Because it's currently easier to build the Crosstool-NG toolchain.
 ## References
 
 ##### Similar works:
-* [eView, russian forum](https://github.com/S-trace/eView)
+* [eView, russian forum](http://www.the-ebook.org/forum/viewtopic.php?p=1040672#1040672)
 
 ##### Rockchip platform:
 * [Another Android Rockchip device modification page](http://freaktab.com/forum/tv-player-support/rk3188-devices/minix-x7-etc/647213-tutorial-modifying-the-boot-image)
