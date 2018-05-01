@@ -94,11 +94,32 @@ ct-ng menuconfig
 ```
 
 ## Configuring crosstool-NG:
-* Target Architecture: arm
-* Operating System: Linux
-* C compiler: gcc version: 4.4.3
-* ---- Additional supported languages: C++
-* C-library: glibc: glibc version: 2.9
+```
+  git clone https://github.com/georghe-crihan/digma-e605-qt-apps-framework.git
+  cd digma-e605-qt-apps-framework/headers/2.6.29-ARM-sibrary/usr
+  make dist
+  mv ../kernel-headers-2.6.29.tgz ~/
+  cd ~/crosstools-ng
+  cp samples/arm-unknown-linux-gnueabi/crosstool.config .config
+  ct-ng menuconfig
+  # and afterwards
+  ct-ng build
+```
+> * Target Options: Target Architecture: arm
+> * --------------- Architecture level: armv5te
+> * --------------- Emit Assembly for CPU: arm926ej-s
+> * --------------- Tune for CPU: arm926ej-s
+> * --------------- Use specific FPU: vfp
+> * --------------- Floating point: software
+> * Toolchain options: Tuple's vendor string: 926ejs
+> * Operating System: Target OS: Linux
+> * ----------------- Get kernel headers from: kernel's headers_install
+> * ----------------- Linux kernel version: custom tarball
+> * ----------------- Path to custom tarball: /home/user/kernel-headers-2.6.29.tgz
+> * C compiler: gcc version: 4.4.3
+> * ----------- Additional supported languages: C++
+> * Binary utilities: binutils version: 2.20.1a
+> * C-library: glibc: glibc version: 2.9
 
 
 
