@@ -250,7 +250,7 @@ objdump -s --section .comment /Volumes/Untitled/target-file
 ```
 
 ### How the kernel is put together:
-Quoting [how is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm) (my translation):
+Quoting russian [how is the kernel image built for the platform](http://roverbooksteel.narod.ru/debian/5point/kernel.htm) (my translation):
 > Putting together a built kernel:
 > ```
 > ./mkkrnlimg arch/arm/boot/Image kernel.img.tmp
@@ -282,12 +282,19 @@ Quoting [how is the kernel image built for the platform](http://roverbooksteel.n
 > -rw-r--r-- 1 119644160 2012-02-19 22:48 system.img
 > ```
 > kernel.img-raw - non-compressed kernel (i.e. a arch/arm/boot/Image file after the build)
+>
 > kernel.img-symbol - address table (System.map file after the build)
 
 > The result after mkkrnlimg tool:
-> ...Hex dump picture here...￼
->
+> ```
+> kernel.img
+> Offset  00 01 02 03    04 05 06 07    08 09 0A 0B    0C 0D 0E 0F    10 11 12 13    0123456789ABCDEF0123				
+> 0000000 4B 52 4E 4C    BC 02 45 00    03 F0 21 E3    10 9F 10 EE    55 00 00 EB    KRNL..E...!.....U...
+> 0000020 05 A0 B0 E1    51 00 00 0A    6A 00 00 EB    05 80 B0 E1    4E 00 00 0A    ....Q...j.......N...
+> ...
+> ```
 > dword 0x4C4E524B - magic value - KRNL
+>
 > dword 0x0045D2BC - kernel size without the address table
 >
 > I.e. the mkkrnlimg tool is functionally identical to the rkcrc tool from the  rkutils package, when run with a "-k" command line parameter:
@@ -299,7 +306,7 @@ Quoting [how is the kernel image built for the platform](http://roverbooksteel.n
 >
 
 ### General info on STOCK firmware for the G6 platform:
-Quoting [russian Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20) (my translation):
+Quoting russian [Sibrary clone hacking page on a prominent gadgets forum](https://4pda.ru/forum/index.php?showtopic=423200&st=20) (my translation):
 > A bit of software: if an executable file or a shell-script is copied into the E-Reader's memory or onto its SD-CARD and then opened in its "File Manager" - it thus will be run. It permits to launch arbitrary code on the E-Reader.
 
 NB: apparently, the SD-CARD's FAT filesystem is mounted with *x* mode bits 
@@ -341,49 +348,49 @@ I also use Wine-HQ for some tools whereas no open source is available.
 
 ## References
 
-#### Rockchip platform:
+##### Rockchip platform:
 * [Another Android Rockchip device modification page](http://freaktab.com/forum/tv-player-support/rk3188-devices/minix-x7-etc/647213-tutorial-modifying-the-boot-image)
 
-#### QT:
+##### QT:
 * [QT Wiki page from Rockchip](http://opensource.rock-chips.com/wiki_Qt)
 * [Another installing QT for Raspberry Pi](https://wiki.qt.io/Building_Qt_for_Embedded_Linux)
 
 Here, the authors apparently were able to patch the boot image, unlike in the
 quotations, I gave above.
 
-#### CentOS image used:
+##### CentOS image used:
 * Name: CentOS-6.9-x86_64-netinstall.iso
 * Size: 241172480
 * MD5: cdab6b8142cb03e5f02102879d11ef44
 * SHA1: 32f9f74fd27ec1ff7cc4f39a80d0dae34d9ec18b
 
-#### imgRePackerRK:
+##### imgRePackerRK:
 * URL: https://forum.xda-developers.com/showthread.php?t=2257331
 * Name: imgRePackerRK_106.zip
 * Size: 180485
 * MD5: 852bcc8f56694d3658db0d7d5e117093
 * SHA1: f17f013c59e29d7376bdb1e856590dbd4a315797
 
-#### Stock DIGMA firmware:
+##### Stock DIGMA firmware:
 * URL: http://digma.ru
 * Name: e605_boot620_20141220.zip
 * Size: 136682454 bytes
 * MD5: b739257045ec5f32363db0ff3ef936e1
 * SHA1: 6f2c9da77ccf88443c4b6f28bbe6655b15f320ca
 
-##### and therein:
+###### and therein:
 * Name: system.img
 * Size: 335544320
 * MD5: 50c88cd2314c3f78aadeb6c6f1f5f7ed
 * SHA1: 736976b6398a0398903a866ce42ad30b707bba88
 
-#### The original Boeye/Sibrary toolchain, found elsewhere:
+##### The original Boeye/Sibrary toolchain, found elsewhere:
 * Name: sibrary_toolchain.tar.bz2 
 * Size: 116721851 bytes
 * MD5: 7dfd9a84d98242e6780e95886a7ce7a2
 * SHA1: 43833e54f9e81d9afcd9e06f76f085b5b99fb922
 
-#### QT Anywhere 4.7.4:
+##### QT Anywhere 4.7.4:
 * URL: http://master.qt.io/archive/qt/4.7/qt-everywhere-opensource-src-4.7.4.tar.gz
 * Size: 220388303
 * MD5: 9831cf1dfa8d0689a06c2c54c5c65aaf
