@@ -18,6 +18,7 @@
   * [How the kernel is put together](#how-the-kernel-is-put-together)
   * [Official Rockchip kernel](#official-rockchip-kernel)
     * [Generating the headers](#generating-the-headers)
+  * [Keyboard input](#keyboard-input)
 * [Digressions](#digressions)
 * [References](#references)
 * [TODO](#todo)
@@ -365,6 +366,11 @@ NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the
     headers_install
 ```
 
+### Keyboard input
+
+  The Back, OK and Arrow keys are handled through the standard QT framework,
+  see [keypressapp](keypressapp).
+
 ## Digressions
 
 ### Why there is a linux VM?
@@ -446,34 +452,16 @@ quotations, I gave above.
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-- [ ] figure out how the device's keys are handled, most probably, via 
-/usr/lib/boeye/libboeye.so and it has something to do with Android platform,
-specifically,
-see the homeReleased()/sendMenuKey()/sendBackKey()/sendHomeKey()/sendFlushKey()
-BUT: what obout the arrows/OK?
-- [ ] figure out how the device's virtual keyboard is invoked
-- [ ] maybe build with the stock 2.6.25 kernel
+- [ ] figure out how the device's Refresh and Home keys are handled,
+most probably, via /usr/lib/boeye/libboeye.so and it has something to do
+with Android platform, specifically,
+see the homeReleased()/sendMenuKey()/sendBackKey()/sendHomeKey()/sendFlushKey().
+
+- [ ] how is the virtual keyboard implemented?
+- [ ] refresh issues - the application is not visible after start, unless the
+screen is forcibly refreshed.
+- [ ] Led control and stuff, see how this works.
+- [ ] figure out how the device's virtual keyboard is invoked.
+- [ ] maybe build with the stock 2.6.25 kernel.
 - [ ] maybe include SSL, ALSA, gstreamer, etc...
 
-## QT configure options cheatsheet:
-
-```
-  -embedded x86
-  -qt-gfx-vnc
-  -no-largefile
-  -exceptions 
-  -no-sse2
-  -qt-zlib
-  -no-gif
-  -no-libtiff
-  -qt-libpng
-  -no-libmng
-  -qt-libjpeg
-  -openssl
-  -depths 16
-  -qt-kbd-linuxinput
-  -nomake demos
-  -nomake examples
-  -qt-mouse-linuxinput
-  -qt-mouse-tslib
-```
