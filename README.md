@@ -460,8 +460,8 @@ see the homeReleased()/sendMenuKey()/sendBackKey()/sendHomeKey()/sendFlushKey().
 - [ ] how is the virtual keyboard implemented?
 - [ ] refresh issues - the application is not visible after start, unless the
 screen is forcibly refreshed.
-- [ ] Led control and stuff, see how this works.
-- [ ] figure out how the device's virtual keyboard is invoked.
+- [ ] LED control and stuff, see how this works.
 - [ ] maybe build with the stock 2.6.25 kernel.
 - [ ] maybe include SSL, ALSA, gstreamer, etc...
+- [ ] maybe try the arm-gnueabi compiler from macports?
 

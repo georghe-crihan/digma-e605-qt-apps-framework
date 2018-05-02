@@ -1,6 +1,6 @@
 #include "keypress.h"
-#include <QApplication>
-#include <QKeyEvent>
+#include <QtGui/QApplication>
+#include <QtGui/QKeyEvent>
  
 KeyPress::KeyPress(QWidget *parent) :
     QWidget(parent)
@@ -25,8 +25,7 @@ void KeyPress::keyPressEvent(QKeyEvent *event)
         myLabel->setText("You pressed UP ARROW");
         break;
     default:
-//        myLabel->setText("You pressed " + event->text());
-        ;
+        myLabel->setText("You pressed " + QKeySequence(event->key()).toString());
     }
 }
  
@@ -43,7 +42,6 @@ void KeyPress::keyReleaseEvent(QKeyEvent *event)
         myLabel->setText("You released UP ARROW");
         break;
     default:
-//        myLabel->setText("You released " + event->text());
-        ;
+        myLabel->setText("You released " + QKeySequence(event->key()).toString());
     }
 }
