@@ -16,10 +16,25 @@ void KeyPress::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_Escape:
-        myLabel->setText("You pressed ESC");
+        myLabel->setText("You pressed BACK");
         break;
     case Qt::Key_Return:
-        myLabel->setText("You pressed RETURN");
+        myLabel->setText("You pressed OK");
+        break;
+    case Qt::Key_F9:
+        myLabel->setText("You pressed MENU");
+        break;
+    case Qt::Key_F5:
+        myLabel->setText("You pressed REFRESH");
+        break;
+    case Qt::Key_Pause:
+        myLabel->setText("You pressed POWER BUTTON");
+        break;
+    case Qt::Key_PageUp:
+        myLabel->setText("You pressed PAGE UP");
+        break;
+    case Qt::Key_PageDown:
+        myLabel->setText("You pressed PAGE DOWN");
         break;
     case Qt::Key_Up:
         myLabel->setText("You pressed UP ARROW");
@@ -33,10 +48,25 @@ void KeyPress::keyReleaseEvent(QKeyEvent *event)
 {
     switch(event->key()) {
     case Qt::Key_Escape:
-        myLabel->setText("You released ESC");
+        myLabel->setText("You released BACK");
         break;
     case Qt::Key_Return:
-        myLabel->setText("You released RETURN");
+        myLabel->setText("You released OK");
+        break;
+    case Qt::Key_F9:
+        myLabel->setText("You released MENU");
+        break;
+    case Qt::Key_F5:
+        myLabel->setText("You released REFRESH");
+        break;
+    case Qt::Key_Pause:
+        myLabel->setText("You released POWER BUTTON");
+        break;
+    case Qt::Key_PageUp:
+        myLabel->setText("You released PAGE UP");
+        break;
+    case Qt::Key_PageDown:
+        myLabel->setText("You released PAGE DOWN");
         break;
     case Qt::Key_Up:
         myLabel->setText("You released UP ARROW");

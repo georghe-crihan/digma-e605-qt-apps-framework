@@ -452,11 +452,6 @@ quotations, I gave above.
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-- [ ] figure out how the device's Refresh and Home keys are handled,
-most probably, via /usr/lib/boeye/libboeye.so and it has something to do
-with Android platform, specifically,
-see the homeReleased()/sendMenuKey()/sendBackKey()/sendHomeKey()/sendFlushKey().
-
 - [ ] how is the virtual keyboard implemented?
 - [ ] refresh issues - the application is not visible after start, unless the
 screen is forcibly refreshed.
