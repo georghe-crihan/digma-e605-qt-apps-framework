@@ -25,7 +25,8 @@ void KeyPress::keyPressEvent(QKeyEvent *event)
         myLabel->setText("You pressed MENU");
         break;
     case Qt::Key_F5:
-        myLabel->setText("You pressed REFRESH");
+// Otherwise, given present refresh issues, you'll never see any other key name.
+//        myLabel->setText("You pressed REFRESH");
         break;
     case Qt::Key_Pause:
         myLabel->setText("You pressed POWER BUTTON");
@@ -57,7 +58,8 @@ void KeyPress::keyReleaseEvent(QKeyEvent *event)
         myLabel->setText("You released MENU");
         break;
     case Qt::Key_F5:
-        myLabel->setText("You released REFRESH");
+// Otherwise, given present refresh issues, you'll never see any other key name.
+//        myLabel->setText("You released REFRESH");
         break;
     case Qt::Key_Pause:
         myLabel->setText("You released POWER BUTTON");

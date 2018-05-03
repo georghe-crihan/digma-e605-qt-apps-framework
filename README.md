@@ -38,6 +38,7 @@ Currently this product is discontinued and unsupported by the vendor.
 
 * Crosstool-ng v. 1.12.4 (1.10.0 for the Android system)
 * Linux boeye 2.6.25-dirty #767 Tue Mar 25 17:00:08 CST 2014 armv5tejl GNU/Linux
+  It looks to be apparently an Android kernel.
 
   Kernel version 2.6.25, <i id="strings">strings(1)</i> found therein:
 ```
@@ -368,8 +369,11 @@ NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the
 
 ### Keyboard input
 
-  The Back, OK and Arrow keys are handled through the standard QT framework,
-  see [keypressapp](keypressapp).
+  The Power, Home, Back, Refresh, OK, Arrow, Page up and Page down keys are
+  handled through the standard QT framework, see [keypressapp](keypressapp).
+
+  The Virtual keyboard is implemented in */usr/lib/boeye/libboeyeim.so*, see
+  the [IM demo application](imdemo).
 
 ## Digressions
 
@@ -452,11 +456,14 @@ quotations, I gave above.
 * SHA1: af9016aa924a577f7b06ffd28c9773b56d74c939
 
 ## TODO:
-- [ ] how is the virtual keyboard implemented?
-- [ ] refresh issues - the application is not visible after start, unless the
+- [ ] Refresh issues - the application is not visible after start, unless the
 screen is forcibly refreshed.
-- [ ] LED control and stuff, see how this works.
+- [ ] LED control, keyboard and backlight checks, networking, partial display
+refresh and lots of other stuff from */usr/lib/boeye/libboeye.so*. Put together
+a demo application to  see how this works.
+- [ ] dig a bit deeper int the DBUS messaging, in particular
+*com.sibrary.Service.GlobalKey*.
 - [ ] maybe build with the stock 2.6.25 kernel.
 - [ ] maybe include SSL, ALSA, gstreamer, etc...
-- [ ] maybe try the arm-gnueabi compiler from macports?
+- [ ] maybe try the arm-unknown-gnueabi compiler from macports?
 
