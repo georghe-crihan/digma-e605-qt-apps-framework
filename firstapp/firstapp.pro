@@ -3,10 +3,10 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = 
+TARGET = first.app
 DEPENDPATH += .
 INCLUDEPATH += .
 
 # Input
-HEADERS += digma_hw.h firstapp.moc
+HEADERS += digma_hw.h
 SOURCES += firstapp.cpp digma_hw.c

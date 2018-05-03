@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = imdemoapp
+TARGET = imdemo.app
 DEPENDPATH += .
 INCLUDEPATH += .
 
