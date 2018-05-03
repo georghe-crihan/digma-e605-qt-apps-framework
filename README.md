@@ -457,12 +457,19 @@ quotations, I gave above.
 
 ## TODO:
 - [ ] Refresh issues - the application is not visible after start, unless the
-screen is forcibly refreshed.
-- [ ] LED control, keyboard and backlight checks, networking, partial display
-refresh and lots of other stuff from */usr/lib/boeye/libboeye.so*. Put together
-a demo application to  see how this works.
+  screen is forcibly refreshed. NB: Currently the refresh itself doesn't seem
+  to work even through stock device library methods (ProxyScreen class).
+- [ ] Put together a demo application to  see how the following works:
+  - [ ] LED control (see [firstapp/digma_hw.c](firstapp/digma_hw.c) for details)
+  - [ ] keyboard and backlight checks,
+  - [ ] networking, whatever that might mean for the platform,
+  - [ ] partial display refresh (see [imdemo/main.cpp](imdemo/main.cpp)), 
+  - [ ] lots of other stuff from */usr/lib/boeye/libboeye.so*.
+  - [ ] virtual keyboard, as it appears to be a singleton object, held by the
+  boeyeserver process, so I wonder if one could use it in own applications?
+- [ ] rectify linking to Boeye's shared libraries as currently it's a hack.
 - [ ] dig a bit deeper int the DBUS messaging, in particular
-*com.sibrary.Service.GlobalKey*.
+  *com.sibrary.Service.GlobalKey*.
 - [ ] maybe build with the stock 2.6.25 kernel.
 - [ ] maybe include SSL, ALSA, gstreamer, etc...
 - [ ] maybe try the arm-unknown-gnueabi compiler from macports?
