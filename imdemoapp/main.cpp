@@ -7,7 +7,10 @@
 class MainWindow : public QMainWindow {
 public:
   void simple() {
-    ui::LineEdit lineEdit(this);
+    setGeometry(0, 0, 599, 799);
+    QWidget widget(this);
+    setCentralWidget(&widget);
+    ui::LineEdit lineEdit(&widget);
     lineEdit.setGeometry(0, 100, 499, 129);
   };
 
