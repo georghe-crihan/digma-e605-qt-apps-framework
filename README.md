@@ -373,7 +373,7 @@ NB: Apparently, this is NOT the version used by Boeye/Sibrary (see the
   handled through the standard QT framework, see [keypressapp](keypressapp).
 
   The Virtual keyboard is implemented in */usr/lib/boeye/libboeyeim.so*, see
-  the [IM demo application](imdemo).
+  the [IM demo application](imdemoapp).
 
 ## Digressions
 
@@ -463,7 +463,7 @@ quotations, I gave above.
   - [ ] LED control (see [firstapp/digma_hw.c](firstapp/digma_hw.c) for details)
   - [ ] keyboard and backlight checks,
   - [ ] networking, whatever that might mean for the platform,
-  - [ ] partial display refresh (see [imdemo/main.cpp](imdemo/main.cpp)), 
+  - [ ] partial display refresh (see [imdemoapp/main.cpp](imdemoapp/main.cpp)), 
   - [ ] lots of other stuff from */usr/lib/boeye/libboeye.so*.
   - [ ] virtual keyboard, as it appears to be a singleton object, held by the
   boeyeserver process, so I wonder if one could use it in own applications?
