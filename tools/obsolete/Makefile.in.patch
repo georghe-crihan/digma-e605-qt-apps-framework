@@ -1,0 +1,14 @@
+--- Makefile.in.orig	2018-05-13 18:29:19.000000000 +0300
++++ Makefile.in	2018-05-13 18:29:38.000000000 +0300
+@@ -26,7 +26,11 @@
+ # '-Rr' to MAKEFLAGS adds it literaly ( and does not add 'Rr' )
+ ifeq ($(filter Rr,$(MAKEFLAGS)),)
+ ifeq ($(filter -Rr,$(MAKEFLAGS)),)
++ifeq ($(filter rR,$(MAKEFLAGS)),)
++ifeq ($(filter -rR,$(MAKEFLAGS)),)
+ CT_MAKEFLAGS += -Rr
++endif
++endif
+ endif # No -Rr
+ endif # No Rr
+ 
